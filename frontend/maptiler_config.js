@@ -3,6 +3,6 @@
  *   https://eualannascimento.github.io/*
  */
 window.MAPTILER_CONFIG = {
-  apiKey: "",
+  apiKey: "BEpqjE2VeivEZqajg9yO",
   recommendedOrigin: "https://eualannascimento.github.io/*",
 };
