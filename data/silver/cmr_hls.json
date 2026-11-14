@@ -1,0 +1,64 @@
+{
+  "id": "cmr_hls",
+  "name": "NASA HLS – Harmonized Landsat Sentinel-2 (STAC 30m)",
+  "provider": "NASA GSFC / LPCLOUD (Parceria USGS + ESA)",
+  "layer": "4. Fenologia & Talhão",
+  "url": "https://cmr.earthdata.nasa.gov/stac/LPCLOUD/search",
+  "auth_required": "Busca STAC 100% Aberta | Bandas COG GeoTIFF exigem Earthdata Login",
+  "expected_format": "STAC GeoJSON -> Cloud-Optimized GeoTIFF (COG)",
+  "actual_format": "application/geo+json (STAC) -> COG GeoTIFF",
+  "spatial_resolution": "30 metros (Escala de Talhão)",
+  "temporal_resolution": "2 a 3 dias (Landsat 8/9 + Sentinel-2A/B)",
+  "coverage": "Global",
+  "data_nature": "Dado Fatídico (Imagem Óptica 30m)",
+  "period_min": "2013 (Landsat 8) / 2015 (Sentinel)",
+  "period_max": "Nov/2026 (2 a 3 dias)",
+  "plain_question": "Como está o verdor (NDVI) e desenvolvimento de cada talhão dentro da fazenda?",
+  "plain_answer": "API STAC retornou 5 cenas recentes (Set–Nov/2026) de 30m exatamente sobre os limites da fazenda.",
+  "fit_score": 4,
+  "fit_analysis": "Ideal para desenhar os polígonos da fazenda (100–1.500 ha) e acompanhar o vigor vegetativo (NDVI/EVI) durante a safra com alta frequência livre de nuvens.",
+  "viz_type": "cmr_granules",
+  "status": "ONLINE_DISCOVERY_ONLY",
+  "http_status": 200,
+  "latency_ms": 974,
+  "audit_notes": "API STAC retornou 5 cenas recentes (Set–Nov/2026) sobre Rio Verde/GO.",
+  "error": null,
+  "extracted_at": "2026-11-14T15:35:53.840735+00:00",
+  "raw_sample": "[\n  {\n    \"id\": \"HLS.S30.T22KEF.2026244T133831.v2.0\",\n    \"start\": \"2026-09-01T13:47:12.957Z\",\n    \"cloud_cover_pct\": 81,\n    \"download_url\": \"https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/HLSS30.020/HLS.S30.T22KEF.2026244T133831.v2.0/HLS.S30.T22KEF.2026244T133831.v2.0.B04.tif\"\n  },\n  {\n    \"id\": \"HLS.S30.T22KDF.2026244T133831.v2.0\",\n    \"start\": \"2026-09-01T13:47:16.561Z\",\n    \"cloud_cover_pct\": 64,\n    \"download_url\": \"https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/HLSS30.020/HLS.S30.T22KDF.2026244T133831.v2.0/HLS.S30.T22KDF.2026244T133831.v2.0.B04.tif\"\n  }\n]",
+  "parsed_data": {
+    "collection": "HLSS30_2.0",
+    "granules_found": 5,
+    "granules": [
+      {
+        "id": "HLS.S30.T22KEF.2026244T133831.v2.0",
+        "start": "2026-09-01T13:47:12.957Z",
+        "cloud_cover_pct": 81,
+        "download_url": "https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/HLSS30.020/HLS.S30.T22KEF.2026244T133831.v2.0/HLS.S30.T22KEF.2026244T133831.v2.0.B04.tif"
+      },
+      {
+        "id": "HLS.S30.T22KDF.2026244T133831.v2.0",
+        "start": "2026-09-01T13:47:16.561Z",
+        "cloud_cover_pct": 64,
+        "download_url": "https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/HLSS30.020/HLS.S30.T22KDF.2026244T133831.v2.0/HLS.S30.T22KDF.2026244T133831.v2.0.B04.tif"
+      },
+      {
+        "id": "HLS.S30.T22KEF.2026246T133139.v2.0",
+        "start": "2026-09-03T13:37:17.323Z",
+        "cloud_cover_pct": 0,
+        "download_url": "https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/HLSS30.020/HLS.S30.T22KEF.2026246T133139.v2.0/HLS.S30.T22KEF.2026246T133139.v2.0.B04.tif"
+      },
+      {
+        "id": "HLS.S30.T22KDF.2026246T133139.v2.0",
+        "start": "2026-09-03T13:37:23.801Z",
+        "cloud_cover_pct": 1,
+        "download_url": "https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/HLSS30.020/HLS.S30.T22KDF.2026246T133139.v2.0/HLS.S30.T22KDF.2026246T133139.v2.0.B04.tif"
+      },
+      {
+        "id": "HLS.S30.T22KEF.2026246T134221.v2.0",
+        "start": "2026-09-03T13:47:30.026Z",
+        "cloud_cover_pct": 0,
+        "download_url": "https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/HLSS30.020/HLS.S30.T22KEF.2026246T134221.v2.0/HLS.S30.T22KEF.2026246T134221.v2.0.B04.tif"
+      }
+    ]
+  }
+}

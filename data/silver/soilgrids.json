@@ -1,0 +1,44 @@
+{
+  "id": "soilgrids",
+  "name": "ISRIC SoilGrids 2.0 – Textura e Classificação de Solo",
+  "provider": "ISRIC World Soil Information (Parceiro Global / FAO)",
+  "layer": "3. Solo & Água",
+  "url": "https://rest.isric.org/soilgrids/v2.0/properties/query",
+  "auth_required": "Nenhum (100% Aberto)",
+  "expected_format": "JSON (GeoJSON Feature)",
+  "actual_format": "application/json (GeoJSON)",
+  "spatial_resolution": "250 metros (Escala de Talhão)",
+  "temporal_resolution": "Estático (Propriedades Físicas do Solo)",
+  "coverage": "Global (Consultado na Zona Rural Rio Verde/GO)",
+  "data_nature": "Dado Fatídico (Mapeamento Físico)",
+  "period_min": "Estático (Perfil permanente)",
+  "period_max": "Estático (Válido para qualquer safra)",
+  "plain_question": "O solo da fazenda é arenoso ou argiloso (retém água bem)? Qual a classe no ZARC?",
+  "plain_answer": "Detectado solo com 38.5% de argila na camada 15–30cm -> classificado automaticamente como Tipo 3 (Argiloso ≥ 35% argila — Alta retenção hídrica).",
+  "fit_score": 5,
+  "fit_analysis": "Resolve um grande gargalo de UX: descobre automaticamente pela coordenada GPS se o solo da fazenda é Arenoso (Tipo 1), Médio (Tipo 2) ou Argiloso (Tipo 3) para consultar as regras corretas de janela de seguro do ZARC (Embrapa).",
+  "viz_type": "soil_profile",
+  "status": "ONLINE_OPEN",
+  "http_status": 200,
+  "latency_ms": 11655,
+  "audit_notes": "",
+  "error": null,
+  "extracted_at": "2026-11-14T15:35:39.204197+00:00",
+  "raw_sample": "{\n  \"type\": \"Feature\",\n  \"geometry\": {\n    \"type\": \"Point\",\n    \"coordinates\": [\n      -51.02,\n      -17.84\n    ]\n  },\n  \"properties\": {\n    \"layers\": [\n      {\n        \"name\": \"clay\",\n        \"unit_measure\": {\n          \"d_factor\": 10,\n          \"mapped_units\": \"g/kg\",\n          \"target_units\": \"%\",\n          \"uncertainty_unit\": \"\"\n        },\n        \"depths\": [\n          {\n            \"range\": {\n              \"top_depth\": 0,\n              \"bottom_depth\": 5,\n              \"unit_depth\": \"cm\"\n            },\n            \"label\": \"0-5cm\",\n            \"values\": {\n              \"mean\": 340\n            }\n          },\n          {\n            \"range\": {\n              \"top_depth\": 15,\n              \"bottom_depth\": 30,\n              \"unit_depth\": \"cm\"\n            },\n            \"label\": \"15-30cm\",\n            \"values\": {\n              \"mean\": 385\n            }\n          }\n        ]\n      },\n      {\n        \"name\": \"sand\",\n        \"unit_measure\": {\n          \"d_factor\": 10,\n          \"mapped_units\": \"g/kg\",\n          \"target_units\": \"%\",\n          \"uncertainty_unit\": \"\"\n        },\n        \"depths\": [\n          {\n            \"range\": {\n              \"top_depth\": 0,\n              \"bottom_depth\": 5,\n              \"unit_depth\": \"cm\"\n            },\n            \"label\": \"0-5cm\",\n            \"values\": {\n              \"mean\": 470\n            }\n          },\n          {\n            \"range\": {\n              \"top_depth\": 15,\n              \"bottom_depth\": 30,\n              \"unit_depth\": \"cm\"\n            },\n            \"label\": \"15-30cm\",\n            \"values\": {\n              \"mean\": 445\n          ",
+  "parsed_data": {
+    "depths": {
+      "0-5cm": {
+        "clay": 34.0,
+        "sand": 47.0,
+        "silt": 19.0
+      },
+      "15-30cm": {
+        "clay": 38.5,
+        "sand": 44.5,
+        "silt": 17.0
+      }
+    },
+    "zarc_soil_code": 3,
+    "zarc_soil_classification": "Tipo 3 (Argiloso ≥ 35% argila — Alta retenção hídrica)"
+  }
+}

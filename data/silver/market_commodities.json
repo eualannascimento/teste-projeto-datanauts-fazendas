@@ -1,0 +1,403 @@
+{
+  "id": "market_commodities",
+  "name": "Mercado Futuro Commodities (CBOT/B3 Proxy + Auditoria CEPEA)",
+  "provider": "CME Group / Yahoo Finance & CEPEA/ESALQ (USP)",
+  "layer": "5. Regulação & Mercado BR",
+  "url": "https://query1.finance.yahoo.com/v8/finance/chart/ZS=F",
+  "auth_required": "CBOT/FX Aberto (JSON) | CEPEA bloqueia bots com WAF HTTP 403",
+  "expected_format": "JSON (Séries Diárias) vs. HTML Protegido (CEPEA)",
+  "actual_format": "application/json (CBOT + BCB PTAX) | CEPEA: HTTP 200",
+  "spatial_resolution": "Referência Global (CBOT) convertida para Paridade Brasil (R$/saca 60kg)",
+  "temporal_resolution": "Diária (Últimos 90 dias)",
+  "coverage": "Soja (ZS=F), Milho (ZC=F), Dólar (BRL=X)",
+  "data_nature": "Dado Fatídico (Mercado em Tempo Real)",
+  "period_min": "90 dias atrás (Histórico diário)",
+  "period_max": "Hoje (Fechamento mais recente)",
+  "plain_question": "Por quanto vou conseguir vender a saca de Soja, Milho e Sorgo em Reais na colheita?",
+  "plain_answer": "Com o Dólar PTAX a R$ 5.65, a paridade estimada em Rio Verde/GO fica em R$ 133.20/sc (Soja), R$ 51.14/sc (Milho) e R$ 40.91/sc (Sorgo).",
+  "fit_score": 4,
+  "fit_analysis": "ACHADO CRÍTICO: O site do CEPEA/ESALQ retorna HTTP 403 para coletores automatizados. Mitigamos usando cotações abertas CBOT + Dólar (BRL=X) convertidas para R$/saca de 60kg com ajuste de base logística (basis Rio Verde/GO).",
+  "viz_type": "market_prices",
+  "status": "ONLINE_OPEN",
+  "http_status": 200,
+  "latency_ms": 1359,
+  "audit_notes": "CBOT (ZS=F, ZC=F) e Dólar Oficial Banco Central PTAX (R$ 5.65) operacionais (200 OK). CEPEA/ESALQ respondeu HTTP 200 com headers de navegador (HTML tabular).",
+  "error": null,
+  "extracted_at": "2026-11-14T15:36:06.800192+00:00",
+  "raw_sample": "{\n  \"ZS=F_last\": {\n    \"date\": \"2026-11-13\",\n    \"close\": 1243.0\n  },\n  \"ZC=F_last\": {\n    \"date\": \"2026-11-13\",\n    \"close\": 445.5\n  },\n  \"BCB_PTAX_USD_BRL\": 5.6518,\n  \"cepea_probe_http\": 200\n}",
+  "parsed_data": {
+    "usd_brl": 5.65,
+    "soy_cbot_cents_bu": 1243.0,
+    "corn_cbot_cents_bu": 445.5,
+    "soy_brl_sc_parity": 154.88,
+    "soy_brl_sc_rio_verde_est": 133.2,
+    "corn_brl_sc_parity": 59.47,
+    "corn_brl_sc_rio_verde_est": 51.14,
+    "sorghum_brl_sc_rio_verde_est": 40.91,
+    "cepea_http_status": 200,
+    "soy_history": [
+      {
+        "date": "2026-09-14",
+        "close": 1285.25
+      },
+      {
+        "date": "2026-09-15",
+        "close": 1318.75
+      },
+      {
+        "date": "2026-09-16",
+        "close": 1320.5
+      },
+      {
+        "date": "2026-09-17",
+        "close": 1319.75
+      },
+      {
+        "date": "2026-09-18",
+        "close": 1303.5
+      },
+      {
+        "date": "2026-09-21",
+        "close": 1328.0
+      },
+      {
+        "date": "2026-09-22",
+        "close": 1325.5
+      },
+      {
+        "date": "2026-09-23",
+        "close": 1318.0
+      },
+      {
+        "date": "2026-09-24",
+        "close": 1317.5
+      },
+      {
+        "date": "2026-09-25",
+        "close": 1319.0
+      },
+      {
+        "date": "2026-09-28",
+        "close": 1288.25
+      },
+      {
+        "date": "2026-09-29",
+        "close": 1297.75
+      },
+      {
+        "date": "2026-09-30",
+        "close": 1293.0
+      },
+      {
+        "date": "2026-10-01",
+        "close": 1284.0
+      },
+      {
+        "date": "2026-10-02",
+        "close": 1278.25
+      },
+      {
+        "date": "2026-10-05",
+        "close": 1280.75
+      },
+      {
+        "date": "2026-10-06",
+        "close": 1303.0
+      },
+      {
+        "date": "2026-10-07",
+        "close": 1297.5
+      },
+      {
+        "date": "2026-10-08",
+        "close": 1287.5
+      },
+      {
+        "date": "2026-10-09",
+        "close": 1292.0
+      },
+      {
+        "date": "2026-10-12",
+        "close": 1287.75
+      },
+      {
+        "date": "2026-10-13",
+        "close": 1283.75
+      },
+      {
+        "date": "2026-10-14",
+        "close": 1277.25
+      },
+      {
+        "date": "2026-10-15",
+        "close": 1263.0
+      },
+      {
+        "date": "2026-10-16",
+        "close": 1261.25
+      },
+      {
+        "date": "2026-10-19",
+        "close": 1253.5
+      },
+      {
+        "date": "2026-10-20",
+        "close": 1248.25
+      },
+      {
+        "date": "2026-10-21",
+        "close": 1245.25
+      },
+      {
+        "date": "2026-10-22",
+        "close": 1253.0
+      },
+      {
+        "date": "2026-10-23",
+        "close": 1256.5
+      },
+      {
+        "date": "2026-10-26",
+        "close": 1241.25
+      },
+      {
+        "date": "2026-10-27",
+        "close": 1229.25
+      },
+      {
+        "date": "2026-10-28",
+        "close": 1224.5
+      },
+      {
+        "date": "2026-10-29",
+        "close": 1219.75
+      },
+      {
+        "date": "2026-10-30",
+        "close": 1222.25
+      },
+      {
+        "date": "2026-11-02",
+        "close": 1204.75
+      },
+      {
+        "date": "2026-11-03",
+        "close": 1203.0
+      },
+      {
+        "date": "2026-11-04",
+        "close": 1193.25
+      },
+      {
+        "date": "2026-11-05",
+        "close": 1181.0
+      },
+      {
+        "date": "2026-11-06",
+        "close": 1189.0
+      },
+      {
+        "date": "2026-11-09",
+        "close": 1182.25
+      },
+      {
+        "date": "2026-11-10",
+        "close": 1224.5
+      },
+      {
+        "date": "2026-11-11",
+        "close": 1229.0
+      },
+      {
+        "date": "2026-11-12",
+        "close": 1227.0
+      },
+      {
+        "date": "2026-11-13",
+        "close": 1243.0
+      }
+    ],
+    "corn_history": [
+      {
+        "date": "2026-09-14",
+        "close": 512.0
+      },
+      {
+        "date": "2026-09-15",
+        "close": 535.75
+      },
+      {
+        "date": "2026-09-16",
+        "close": 534.25
+      },
+      {
+        "date": "2026-09-17",
+        "close": 530.5
+      },
+      {
+        "date": "2026-09-18",
+        "close": 527.5
+      },
+      {
+        "date": "2026-09-21",
+        "close": 543.0
+      },
+      {
+        "date": "2026-09-22",
+        "close": 536.75
+      },
+      {
+        "date": "2026-09-23",
+        "close": 529.0
+      },
+      {
+        "date": "2026-09-24",
+        "close": 527.5
+      },
+      {
+        "date": "2026-09-25",
+        "close": 528.25
+      },
+      {
+        "date": "2026-09-28",
+        "close": 523.0
+      },
+      {
+        "date": "2026-09-29",
+        "close": 522.0
+      },
+      {
+        "date": "2026-09-30",
+        "close": 500.75
+      },
+      {
+        "date": "2026-10-01",
+        "close": 502.25
+      },
+      {
+        "date": "2026-10-02",
+        "close": 497.75
+      },
+      {
+        "date": "2026-10-05",
+        "close": 497.25
+      },
+      {
+        "date": "2026-10-06",
+        "close": 508.0
+      },
+      {
+        "date": "2026-10-07",
+        "close": 502.0
+      },
+      {
+        "date": "2026-10-08",
+        "close": 500.25
+      },
+      {
+        "date": "2026-10-09",
+        "close": 479.75
+      },
+      {
+        "date": "2026-10-12",
+        "close": 483.0
+      },
+      {
+        "date": "2026-10-13",
+        "close": 482.75
+      },
+      {
+        "date": "2026-10-14",
+        "close": 480.75
+      },
+      {
+        "date": "2026-10-15",
+        "close": 478.0
+      },
+      {
+        "date": "2026-10-16",
+        "close": 474.25
+      },
+      {
+        "date": "2026-10-19",
+        "close": 467.0
+      },
+      {
+        "date": "2026-10-20",
+        "close": 462.0
+      },
+      {
+        "date": "2026-10-21",
+        "close": 463.25
+      },
+      {
+        "date": "2026-10-22",
+        "close": 460.5
+      },
+      {
+        "date": "2026-10-23",
+        "close": 456.0
+      },
+      {
+        "date": "2026-10-26",
+        "close": 455.0
+      },
+      {
+        "date": "2026-10-27",
+        "close": 448.75
+      },
+      {
+        "date": "2026-10-28",
+        "close": 451.75
+      },
+      {
+        "date": "2026-10-29",
+        "close": 451.25
+      },
+      {
+        "date": "2026-10-30",
+        "close": 447.75
+      },
+      {
+        "date": "2026-11-02",
+        "close": 448.25
+      },
+      {
+        "date": "2026-11-03",
+        "close": 442.5
+      },
+      {
+        "date": "2026-11-04",
+        "close": 444.25
+      },
+      {
+        "date": "2026-11-05",
+        "close": 440.0
+      },
+      {
+        "date": "2026-11-06",
+        "close": 441.5
+      },
+      {
+        "date": "2026-11-09",
+        "close": 439.25
+      },
+      {
+        "date": "2026-11-10",
+        "close": 449.0
+      },
+      {
+        "date": "2026-11-11",
+        "close": 448.0
+      },
+      {
+        "date": "2026-11-12",
+        "close": 442.5
+      },
+      {
+        "date": "2026-11-13",
+        "close": 445.5
+      }
+    ]
+  }
+}

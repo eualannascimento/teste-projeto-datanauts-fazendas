@@ -1,0 +1,37 @@
+{
+  "id": "nasa_gmao",
+  "name": "NASA GMAO – GEOS-S2S (Portal & OPeNDAP)",
+  "provider": "NASA Global Modeling and Assimilation Office",
+  "layer": "1. Macro-Clima & Sazonal",
+  "url": "https://gmao.gsfc.nasa.gov/weather_prediction/",
+  "auth_required": "Nenhum (Portal e OPeNDAP públicos)",
+  "expected_format": "HTML / OPeNDAP GrADS",
+  "actual_format": "text/html + OPeNDAP Directory",
+  "spatial_resolution": "0.5° x 0.5° (~50 km)",
+  "temporal_resolution": "Mensal / Sub-sazonal (1 a 9 meses)",
+  "coverage": "Global (Modelo acoplado oceano-atmosfera da NASA)",
+  "data_nature": "Previsão (Forecasting)",
+  "period_min": "Mês Atual (Inicialização)",
+  "period_max": "Horizonte de +9 meses",
+  "plain_question": "Qual é o motor físico da NASA por trás das previsões globais do El Niño?",
+  "plain_answer": "É o supermodelo climático da NASA que simula oceanos e atmosfera. Na prática, seus resultados já são entregues mastigados dentro do consórcio NMME acima.",
+  "fit_score": 4,
+  "fit_analysis": "Modelo físico oficial da NASA por trás das previsões de El Niño. O acesso direto bruto via OPeNDAP exige clientes GrADS/xarray pesados; na prática de engenharia, consumir o GEOS consolidado dentro do NMME (NetCDF acima) reduz latência e complexidade em 90%.",
+  "viz_type": "audit_summary",
+  "status": "ONLINE_OPEN",
+  "http_status": 200,
+  "latency_ms": 1640,
+  "audit_notes": "Portal GMAO e servidor OPeNDAP NCCS respondendo normalmente. Recomendado consumo via ensemble NMME.",
+  "error": null,
+  "extracted_at": "2026-11-14T15:35:16.883290+00:00",
+  "raw_sample": "OPeNDAP NCCS Status: 200\nDiretórios detectados: ['http://opendap.nccs.nasa.gov:80/dods/GEOS-5', 'http://opendap.nccs.nasa.gov:80/dods/gmao']",
+  "parsed_data": {
+    "portal_status": 200,
+    "opendap_status": 200,
+    "opendap_url": "https://opendap.nccs.nasa.gov/dods/",
+    "sample_collections": [
+      "http://opendap.nccs.nasa.gov:80/dods/GEOS-5",
+      "http://opendap.nccs.nasa.gov:80/dods/gmao"
+    ]
+  }
+}

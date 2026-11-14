@@ -1,0 +1,69 @@
+{
+  "id": "cmr_gpm",
+  "name": "NASA GPM IMERG – Catálogo CMR (GPM_3IMERGDF)",
+  "provider": "NASA GES DISC / Goddard Space Flight Center",
+  "layer": "2. Agromet & Satélite",
+  "url": "https://cmr.earthdata.nasa.gov/search/granules.json",
+  "auth_required": "Descoberta CMR Aberta | Download HDF5/NetCDF exige Earthdata Login (Gratuito)",
+  "expected_format": "JSON (Metadados) -> HDF5/NetCDF4 (Pixels)",
+  "actual_format": "application/json (CMR) -> HDF5 (.HDF5)",
+  "spatial_resolution": "0.1° x 0.1° (~10 km)",
+  "temporal_resolution": "Diária / 30 min",
+  "coverage": "Global (60°N–60°S)",
+  "data_nature": "Dado Fatídico (Observado) — Catálogo",
+  "period_min": "Jun/2000",
+  "period_max": "Tempo Quase Real (2026)",
+  "plain_question": "Onde ficam os arquivos originais de chuva da NASA com calibração científica máxima?",
+  "plain_answer": "Catálogo aberto confirmando passagens diárias da constelação GPM sobre a fazenda em Nov/2026.",
+  "fit_score": 5,
+  "fit_analysis": "Fonte primária oficial da NASA para precipitação calibrada por satélite. Na fase de produção com Earthdata Token, alimenta alertas locais de chuva acumulada na fazenda.",
+  "viz_type": "cmr_granules",
+  "status": "ONLINE_DISCOVERY_ONLY",
+  "http_status": 200,
+  "latency_ms": 708,
+  "audit_notes": "Busca de grânulos 100% aberta; download direto do HDF5 no GES DISC requer Earthdata Bearer Token.",
+  "error": null,
+  "extracted_at": "2026-11-14T15:35:38.064225+00:00",
+  "raw_sample": "[\n  {\n    \"id\": \"GPM_3IMERGDF.07:3B-DAY.MS.MRG.3IMERG.20250930-S000000-E235959.V07B.nc4\",\n    \"start\": \"2025-09-30T00:00:00.000Z\",\n    \"end\": \"2025-09-30T23:59:59.999Z\",\n    \"size_mb\": \"30.9714450836182\",\n    \"download_url\": \"https://data.gesdisc.earthdata.nasa.gov/data/GPM_L3/GPM_3IMERGDF.07/2025/09/3B-DAY.MS.MRG.3IMERG.20250930-S000000-E235959.V07B.nc4\"\n  },\n  {\n    \"id\": \"GPM_3IMERGDF.07:3B-DAY.MS.MRG.3IMERG.20250929-S000000-E235959.V07B.nc4\",\n    \"start\": \"2025-09-29T00:00:00.000Z\",\n    \"end\": \"2025-09-29T23:59:59.999Z\",\n    \"size_mb\": \"30.6221685409546\",\n    \"download_url\": \"https://data.gesdisc.earthdata.nasa.gov/data/GPM_L3/GPM_3IMERGDF.07/2025/09/3B-DAY.MS.MRG.3IMERG.20250929-S000000-E235959.V07B.nc4\"\n  }\n]",
+  "parsed_data": {
+    "collection": "GPM_3IMERGDF v07",
+    "granules_found": 5,
+    "granules": [
+      {
+        "id": "GPM_3IMERGDF.07:3B-DAY.MS.MRG.3IMERG.20250930-S000000-E235959.V07B.nc4",
+        "start": "2025-09-30T00:00:00.000Z",
+        "end": "2025-09-30T23:59:59.999Z",
+        "size_mb": "30.9714450836182",
+        "download_url": "https://data.gesdisc.earthdata.nasa.gov/data/GPM_L3/GPM_3IMERGDF.07/2025/09/3B-DAY.MS.MRG.3IMERG.20250930-S000000-E235959.V07B.nc4"
+      },
+      {
+        "id": "GPM_3IMERGDF.07:3B-DAY.MS.MRG.3IMERG.20250929-S000000-E235959.V07B.nc4",
+        "start": "2025-09-29T00:00:00.000Z",
+        "end": "2025-09-29T23:59:59.999Z",
+        "size_mb": "30.6221685409546",
+        "download_url": "https://data.gesdisc.earthdata.nasa.gov/data/GPM_L3/GPM_3IMERGDF.07/2025/09/3B-DAY.MS.MRG.3IMERG.20250929-S000000-E235959.V07B.nc4"
+      },
+      {
+        "id": "GPM_3IMERGDF.07:3B-DAY.MS.MRG.3IMERG.20250928-S000000-E235959.V07B.nc4",
+        "start": "2025-09-28T00:00:00.000Z",
+        "end": "2025-09-28T23:59:59.999Z",
+        "size_mb": "31.0935640335083",
+        "download_url": "https://data.gesdisc.earthdata.nasa.gov/data/GPM_L3/GPM_3IMERGDF.07/2025/09/3B-DAY.MS.MRG.3IMERG.20250928-S000000-E235959.V07B.nc4"
+      },
+      {
+        "id": "GPM_3IMERGDF.07:3B-DAY.MS.MRG.3IMERG.20250927-S000000-E235959.V07B.nc4",
+        "start": "2025-09-27T00:00:00.000Z",
+        "end": "2025-09-27T23:59:59.999Z",
+        "size_mb": "31.0801982879639",
+        "download_url": "https://data.gesdisc.earthdata.nasa.gov/data/GPM_L3/GPM_3IMERGDF.07/2025/09/3B-DAY.MS.MRG.3IMERG.20250927-S000000-E235959.V07B.nc4"
+      },
+      {
+        "id": "GPM_3IMERGDF.07:3B-DAY.MS.MRG.3IMERG.20250926-S000000-E235959.V07B.nc4",
+        "start": "2025-09-26T00:00:00.000Z",
+        "end": "2025-09-26T23:59:59.999Z",
+        "size_mb": "31.0895795822144",
+        "download_url": "https://data.gesdisc.earthdata.nasa.gov/data/GPM_L3/GPM_3IMERGDF.07/2025/09/3B-DAY.MS.MRG.3IMERG.20250926-S000000-E235959.V07B.nc4"
+      }
+    ]
+  }
+}

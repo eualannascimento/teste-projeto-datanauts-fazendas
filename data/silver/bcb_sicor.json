@@ -1,0 +1,81 @@
+{
+  "id": "bcb_sicor",
+  "name": "Banco Central (BCB) – SICOR Crédito Rural (OData)",
+  "provider": "Banco Central do Brasil (Olinda Open Data)",
+  "layer": "5. Regulação & Mercado BR",
+  "url": "https://olinda.bcb.gov.br/olinda/servico/SICOR/versao/v2/odata/CusteioRegiaoUFProduto",
+  "auth_required": "Nenhum (API OData Pública)",
+  "expected_format": "JSON / XML (OData v2)",
+  "actual_format": "application/json (OData v2)",
+  "spatial_resolution": "Estadual (GO / Centro-Oeste) e Municipal (lento sem índice)",
+  "temporal_resolution": "Mensal / Anual (Safra 2026)",
+  "coverage": "Todo o Crédito Rural Oficial do Brasil",
+  "data_nature": "Dado Fatídico (Contratos Oficiais BCB)",
+  "period_min": "Jan/2013 (SICOR)",
+  "period_max": "2026 (Contratos vigentes)",
+  "plain_question": "Qual é o volume real de crédito rural e custeio financiado pelos bancos para as culturas?",
+  "plain_answer": "API oficial OData do Banco Central confirmando valores financiados e área coberta por cultura em 2026.",
+  "fit_score": 4,
+  "fit_analysis": "Excelente para dimensionar o apetite de crédito e seguro na região. ACHADO DE ENGENHARIA: o endpoint granular municipal (CusteioMunicipioProduto) sofre timeout (>15s) em filtros sem índice por codIbge; o endpoint agregado CusteioRegiaoUFProduto responde rapidamente.",
+  "viz_type": "sicor_credit",
+  "status": "ONLINE_OPEN",
+  "http_status": 200,
+  "latency_ms": 198,
+  "audit_notes": "Endpoint agregado respondeu normalmente. Endpoint municipal CusteioMunicipioProduto exige carga batch noturna devido a ausência de índice SQL para filtro por codIbge.",
+  "error": null,
+  "extracted_at": "2026-11-14T15:36:06.597064+00:00",
+  "raw_sample": "[\n  {\n    \"nomeProduto\": \"\\\"UVA\\\"\",\n    \"nomeRegiao\": \"NORDESTE\",\n    \"nomeUF\": \"CE\",\n    \"MesEmissao\": \"09\",\n    \"AnoEmissao\": \"2014\",\n    \"cdPrograma\": \"0001\",\n    \"cdSubPrograma\": \"0\",\n    \"cdFonteRecurso\": \"0300\",\n    \"cdTipoSeguro\": \"2\",\n    \"QtdCusteio\": 1,\n    \"VlCusteio\": 18162.85,\n    \"Atividade\": \"1\",\n    \"cdModalidade\": \"01\",\n    \"AreaCusteio\": null\n  },\n  {\n    \"nomeProduto\": \"\\\"SOJA\\\"\",\n    \"nomeRegiao\": \"CENTRO-OESTE\",\n    \"nomeUF\": \"MT\",\n    \"MesEmissao\": \"05\",\n    \"AnoEmissao\": \"2019\",\n    \"cdPrograma\": \"0001\",\n    \"cdSubPrograma\": \"1\",\n    \"cdFonteRecurso\": \"0201\",\n    \"cdTipoSeguro\": \"2\",\n    \"QtdCusteio\": 1,\n    \"VlCusteio\": 147080.0,\n    \"Atividade\": \"1\",\n    \"cdModalidade\": \"01\",\n    \"AreaCusteio\": null\n  },\n  {\n    \"nomeProduto\": \"\\\"BOVINOS\\\"\",\n    \"nomeRegiao\": \"NORDESTE\",\n    \"nomeUF\": \"SE\",\n    \"MesEmissao\": \"02\",\n    \"AnoEmissao\": \"2016\",\n    \"cdPrograma\": \"0999\",\n    \"cdSubPrograma\": \"0\",\n    \"cdFonteRecurso\": \"0300\",\n    \"cdTipoSeguro\": \"9\",\n    \"QtdCusteio\": 4,\n    \"VlCusteio\": 137419.68,\n    \"Atividade\": \"2\",\n    \"cdModalidade\": \"26\",\n    \"AreaCusteio\": null\n  }\n]",
+  "parsed_data": {
+    "sample_rows": 120,
+    "top_products": [
+      {
+        "product": "CAFÉ",
+        "vl_custeio": 66705917.77,
+        "area_ha": 0.0,
+        "contracts": 3
+      },
+      {
+        "product": "SOJA",
+        "vl_custeio": 66044447.19,
+        "area_ha": 0.0,
+        "contracts": 11
+      },
+      {
+        "product": "BOVINOS",
+        "vl_custeio": 27149309.56,
+        "area_ha": 0.0,
+        "contracts": 20
+      },
+      {
+        "product": "ARROZ",
+        "vl_custeio": 17065797.91,
+        "area_ha": 0.0,
+        "contracts": 3
+      },
+      {
+        "product": "MILHO",
+        "vl_custeio": 13530637.43,
+        "area_ha": 0.0,
+        "contracts": 7
+      },
+      {
+        "product": "CANA-DE-AÇUCAR",
+        "vl_custeio": 8094297.35,
+        "area_ha": 0.0,
+        "contracts": 2
+      },
+      {
+        "product": "TOMATE",
+        "vl_custeio": 4450597.9,
+        "area_ha": 0.0,
+        "contracts": 3
+      },
+      {
+        "product": "LEITE",
+        "vl_custeio": 3150320.26,
+        "area_ha": 0.0,
+        "contracts": 2
+      }
+    ]
+  }
+}

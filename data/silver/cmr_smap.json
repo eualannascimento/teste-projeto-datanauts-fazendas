@@ -1,0 +1,69 @@
+{
+  "id": "cmr_smap",
+  "name": "NASA SMAP L4 – Umidade na Zona de Raízes (SPL4SMGP)",
+  "provider": "NASA JPL / NSIDC DAAC",
+  "layer": "3. Solo & Água",
+  "url": "https://cmr.earthdata.nasa.gov/search/granules.json",
+  "auth_required": "Descoberta CMR Aberta | Download HDF5/AppEEARS exige Earthdata Login",
+  "expected_format": "JSON (CMR) -> HDF5 / GeoTIFF",
+  "actual_format": "application/json (CMR) -> HDF5 (.h5)",
+  "spatial_resolution": "9 km (Superfície 0–5cm e Zona de Raiz 0–100cm)",
+  "temporal_resolution": "A cada 3 horas (Latência operacional ~2,5 dias)",
+  "coverage": "Global",
+  "data_nature": "Dado Fatídico + Assimilação (Observado)",
+  "period_min": "Mar/2015 (Lançamento SMAP)",
+  "period_max": "D-3 dias (Tempo Quase Real)",
+  "plain_question": "Já há água suficiente na profundidade da raiz para a semente germinar hoje?",
+  "plain_answer": "Cobertura contínua de 9 km confirmada sobre Rio Verde em Nov/2026; pixels disponíveis via Earthdata Token.",
+  "fit_score": 5,
+  "fit_analysis": "Sensor vital para o 'Semáforo de Plantio': mede diretamente a umidade na zona radicular para impedir que o produtor semeie no pó antes da consolidação das chuvas de El Niño.",
+  "viz_type": "cmr_granules",
+  "status": "ONLINE_DISCOVERY_ONLY",
+  "http_status": 200,
+  "latency_ms": 687,
+  "audit_notes": "Grânulos ativos em 2026 confirmados sobre Rio Verde/GO. Em produção, extrair série via NASA AppEEARS API com Earthdata Bearer Token.",
+  "error": null,
+  "extracted_at": "2026-11-14T15:35:50.862043+00:00",
+  "raw_sample": "[\n  {\n    \"id\": \"SMAP_L4_SM_gph_20261110T223000_Vv8013_001.h5_u9loH5HD\",\n    \"start\": \"2026-11-10T21:00:00.000Z\",\n    \"end\": \"2026-11-11T00:00:00.000Z\",\n    \"size_mb\": \"142.94359493255615\",\n    \"download_url\": \"https://data.nsidc.earthdatacloud.nasa.gov/nsidc-cumulus-prod-protected/SMAP/SPL4SMGP/008/2026/11/10/SMAP_L4_SM_gph_20261110T223000_Vv8013_001.h5\"\n  },\n  {\n    \"id\": \"SMAP_L4_SM_gph_20261110T193000_Vv8013_001.h5_u9loH5HD\",\n    \"start\": \"2026-11-10T18:00:00.000Z\",\n    \"end\": \"2026-11-10T21:00:00.000Z\",\n    \"size_mb\": \"143.29909610748285\",\n    \"download_url\": \"https://data.nsidc.earthdatacloud.nasa.gov/nsidc-cumulus-prod-protected/SMAP/SPL4SMGP/008/2026/11/10/SMAP_L4_SM_gph_20261110T193000_Vv8013_001.h5\"\n  }\n]",
+  "parsed_data": {
+    "collection": "SPL4SMGP v007/v008",
+    "granules_found": 5,
+    "granules": [
+      {
+        "id": "SMAP_L4_SM_gph_20261110T223000_Vv8013_001.h5_u9loH5HD",
+        "start": "2026-11-10T21:00:00.000Z",
+        "end": "2026-11-11T00:00:00.000Z",
+        "size_mb": "142.94359493255615",
+        "download_url": "https://data.nsidc.earthdatacloud.nasa.gov/nsidc-cumulus-prod-protected/SMAP/SPL4SMGP/008/2026/11/10/SMAP_L4_SM_gph_20261110T223000_Vv8013_001.h5"
+      },
+      {
+        "id": "SMAP_L4_SM_gph_20261110T193000_Vv8013_001.h5_u9loH5HD",
+        "start": "2026-11-10T18:00:00.000Z",
+        "end": "2026-11-10T21:00:00.000Z",
+        "size_mb": "143.29909610748285",
+        "download_url": "https://data.nsidc.earthdatacloud.nasa.gov/nsidc-cumulus-prod-protected/SMAP/SPL4SMGP/008/2026/11/10/SMAP_L4_SM_gph_20261110T193000_Vv8013_001.h5"
+      },
+      {
+        "id": "SMAP_L4_SM_gph_20261110T163000_Vv8013_001.h5_u9loH5HD",
+        "start": "2026-11-10T15:00:00.000Z",
+        "end": "2026-11-10T18:00:00.000Z",
+        "size_mb": "144.31050109863276",
+        "download_url": "https://data.nsidc.earthdatacloud.nasa.gov/nsidc-cumulus-prod-protected/SMAP/SPL4SMGP/008/2026/11/10/SMAP_L4_SM_gph_20261110T163000_Vv8013_001.h5"
+      },
+      {
+        "id": "SMAP_L4_SM_gph_20261110T133000_Vv8013_001.h5_u9loH5HD",
+        "start": "2026-11-10T12:00:00.000Z",
+        "end": "2026-11-10T15:00:00.000Z",
+        "size_mb": "143.86407279968267",
+        "download_url": "https://data.nsidc.earthdatacloud.nasa.gov/nsidc-cumulus-prod-protected/SMAP/SPL4SMGP/008/2026/11/10/SMAP_L4_SM_gph_20261110T133000_Vv8013_001.h5"
+      },
+      {
+        "id": "SMAP_L4_SM_gph_20261110T103000_Vv8013_001.h5_u9loH5HD",
+        "start": "2026-11-10T09:00:00.000Z",
+        "end": "2026-11-10T12:00:00.000Z",
+        "size_mb": "146.37244129180905",
+        "download_url": "https://data.nsidc.earthdatacloud.nasa.gov/nsidc-cumulus-prod-protected/SMAP/SPL4SMGP/008/2026/11/10/SMAP_L4_SM_gph_20261110T103000_Vv8013_001.h5"
+      }
+    ]
+  }
+}

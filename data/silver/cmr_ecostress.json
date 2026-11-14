@@ -1,0 +1,69 @@
+{
+  "id": "cmr_ecostress",
+  "name": "NASA ECOSTRESS – Evapotranspiração e Estresse Térmico (70m)",
+  "provider": "NASA JPL / LP DAAC (A bordo da ISS)",
+  "layer": "4. Fenologia & Talhão",
+  "url": "https://cmr.earthdata.nasa.gov/search/granules.json",
+  "auth_required": "Descoberta CMR Aberta | Download HDF5/GeoTIFF exige Earthdata Login",
+  "expected_format": "JSON (CMR) -> HDF5 / GeoTIFF",
+  "actual_format": "application/json (CMR) -> GeoTIFF/HDF5",
+  "spatial_resolution": "70 metros x 70 metros (Escala intra-talhão)",
+  "temporal_resolution": "Revisita variável de 1 a 5 dias",
+  "coverage": "Global (±52° Latitude — cobre 100% do Brasil)",
+  "data_nature": "Dado Fatídico (Térmico / ISS)",
+  "period_min": "Jul/2018",
+  "period_max": "Tempo Quase Real (2026)",
+  "plain_question": "As plantas do talhão já estão sentindo sede/calor antes mesmo da folha amarelar?",
+  "plain_answer": "Passagens térmicas de 70m sobre Rio Verde confirmadas em 2026 no CMR; permite alerta precoce de veranico.",
+  "fit_score": 5,
+  "fit_analysis": "Resolução de 70m permite enxergar talhões individuais em fazendas de 100–1.500 ha e detectar estresse hídrico na floração (veranico de El Niño) até 14 dias antes do NDVI.",
+  "viz_type": "cmr_granules",
+  "status": "ONLINE_DISCOVERY_ONLY",
+  "http_status": 200,
+  "latency_ms": 692,
+  "audit_notes": "Cenas recentes de 70m sobre Rio Verde/GO confirmadas no CMR. Pixel extraction via AppEEARS requer Earthdata Token.",
+  "error": null,
+  "extracted_at": "2026-11-14T15:35:53.141345+00:00",
+  "raw_sample": "[\n  {\n    \"id\": \"ECOv002_L3T_JET_46942_017_22KEF_20261015T190255_0713_01\",\n    \"start\": \"2026-10-15T19:02:55.287Z\",\n    \"end\": \"2026-10-15T19:03:47.257Z\",\n    \"size_mb\": \"3.45\",\n    \"download_url\": \"https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/ECO_L3T_JET.002/ECOv002_L3T_JET_46942_017_22KEF_20261015T190255_0713_01/ECOv002_L3T_JET_46942_017_22KEF_20261015T190255_0713_01_STICinst.tif\"\n  },\n  {\n    \"id\": \"ECOv003_L3T_JET_46942_017_22KEF_20261015T190255_01\",\n    \"start\": \"2026-10-15T19:02:55.287Z\",\n    \"end\": \"2026-10-15T19:03:47.257Z\",\n    \"size_mb\": \"9.05\",\n    \"download_url\": \"https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/ECO_L3T_JET.003/ECOv003_L3T_JET_46942_017_22KEF_20261015T190255_01/ECOv003_L3T_JET_46942_017_22KEF_20261015T190255_01_PTJPLSMinst.tif\"\n  }\n]",
+  "parsed_data": {
+    "collection": "ECO_L3T_JET v002",
+    "granules_found": 5,
+    "granules": [
+      {
+        "id": "ECOv002_L3T_JET_46942_017_22KEF_20261015T190255_0713_01",
+        "start": "2026-10-15T19:02:55.287Z",
+        "end": "2026-10-15T19:03:47.257Z",
+        "size_mb": "3.45",
+        "download_url": "https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/ECO_L3T_JET.002/ECOv002_L3T_JET_46942_017_22KEF_20261015T190255_0713_01/ECOv002_L3T_JET_46942_017_22KEF_20261015T190255_0713_01_STICinst.tif"
+      },
+      {
+        "id": "ECOv003_L3T_JET_46942_017_22KEF_20261015T190255_01",
+        "start": "2026-10-15T19:02:55.287Z",
+        "end": "2026-10-15T19:03:47.257Z",
+        "size_mb": "9.05",
+        "download_url": "https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/ECO_L3T_JET.003/ECOv003_L3T_JET_46942_017_22KEF_20261015T190255_01/ECOv003_L3T_JET_46942_017_22KEF_20261015T190255_01_PTJPLSMinst.tif"
+      },
+      {
+        "id": "ECOv003_L3T_JET_46881_017_22KEF_20261011T203527_01",
+        "start": "2026-10-11T20:35:27.504Z",
+        "end": "2026-10-11T20:36:19.474Z",
+        "size_mb": "69.76",
+        "download_url": "https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/ECO_L3T_JET.003/ECOv003_L3T_JET_46881_017_22KEF_20261011T203527_01/ECOv003_L3T_JET_46881_017_22KEF_20261011T203527_01_PTJPLSMinst.tif"
+      },
+      {
+        "id": "ECOv002_L3T_JET_46764_032_22KEF_20261004T093225_0713_01",
+        "start": "2026-10-04T09:32:25.084Z",
+        "end": "2026-10-04T09:33:17.054Z",
+        "size_mb": "0.39",
+        "download_url": "https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/ECO_L3T_JET.002/ECOv002_L3T_JET_46764_032_22KEF_20261004T093225_0713_01/ECOv002_L3T_JET_46764_032_22KEF_20261004T093225_0713_01_STICinst.tif"
+      },
+      {
+        "id": "ECOv002_L3T_JET_46764_031_22KEF_20261004T093133_0713_01",
+        "start": "2026-10-04T09:31:33.114Z",
+        "end": "2026-10-04T09:32:25.084Z",
+        "size_mb": "43.55",
+        "download_url": "https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/ECO_L3T_JET.002/ECOv002_L3T_JET_46764_031_22KEF_20261004T093133_0713_01/ECOv002_L3T_JET_46764_031_22KEF_20261004T093133_0713_01_STICinst.tif"
+      }
+    ]
+  }
+}

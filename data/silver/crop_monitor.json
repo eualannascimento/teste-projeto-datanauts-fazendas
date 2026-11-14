@@ -1,0 +1,31 @@
+{
+  "id": "crop_monitor",
+  "name": "NASA Harvest / GEOGLAM – Crop Monitor Global",
+  "provider": "NASA Harvest Consortium & G20 GEOGLAM (Parceiro CONAB)",
+  "layer": "4. Fenologia & Talhão",
+  "url": "https://cropmonitor.org/",
+  "auth_required": "Nenhum (Portal Público)",
+  "expected_format": "HTML / Boletins Mensais PDF / Mapas",
+  "actual_format": "text/html",
+  "spatial_resolution": "Macrorregional (Grandes Regiões Agrícolas)",
+  "temporal_resolution": "Mensal",
+  "coverage": "Global (Inclui Brasil: Centro-Oeste, Sul, Matopiba)",
+  "data_nature": "Boletim de Monitoramento Global",
+  "period_min": "2013",
+  "period_max": "Mensal (2026)",
+  "plain_question": "Como está a condição geral da safra nos grandes polos do Brasil e competidores (EUA/Argentina)?",
+  "plain_answer": "Portal público ativo; fornece contexto macro de oferta global, sem API pontual por fazenda.",
+  "fit_score": 3,
+  "fit_analysis": "Ótimo para contexto macroeconômico e validação de calendários agrícolas globais, mas não possui API granular por município ou fazenda.",
+  "viz_type": "audit_summary",
+  "status": "ONLINE_OPEN",
+  "http_status": 200,
+  "latency_ms": 1849,
+  "audit_notes": "Portal oficial ativo. Sem endpoint REST granular para coordenadas individuais.",
+  "error": null,
+  "extracted_at": "2026-11-14T15:35:55.540788+00:00",
+  "raw_sample": "Title: GEOGLAM Crop Monitor",
+  "parsed_data": {
+    "portal_title": "GEOGLAM Crop Monitor"
+  }
+}

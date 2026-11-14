@@ -1,0 +1,148 @@
+{
+  "id": "nmme_seasonal",
+  "name": "NMME – Previsão Sazonal Probabilística (NASA GEOS + NOAA)",
+  "provider": "Consórcio NMME (NASA GMAO, NOAA CPC, NCAR, IRI)",
+  "layer": "1. Macro-Clima & Sazonal",
+  "url": "https://ftp.cpc.ncep.noaa.gov/NMME/prob/netcdf/",
+  "auth_required": "Nenhum (100% Aberto via HTTPS/FTP)",
+  "expected_format": "NetCDF4 / NetCDF3 (Matricial)",
+  "actual_format": "NetCDF (application/x-netcdf)",
+  "spatial_resolution": "1.0° x 1.0° (~110 km) — célula sobre Rio Verde/GO",
+  "temporal_resolution": "Trimestres sazonais até 7 meses à frente",
+  "coverage": "Global (Recorte extraído para -17.79°, -50.92°)",
+  "data_nature": "Previsão (Forecasting)",
+  "period_min": "OND 2026",
+  "period_max": "AMJ 2027",
+  "plain_question": "Vai faltar chuva ou fazer mais calor na fazenda durante a próxima safra e safrinha?",
+  "plain_answer": "Para Rio Verde/GO (OND 2026), o consenso multi-modelo aponta 52.2% de chance de chuva abaixo da média e 100.0% de calor acima da média.",
+  "fit_score": 5,
+  "fit_analysis": "Ouro para antecipação do próximo ano: entrega a probabilidade multi-modelo (incluindo o NASA GEOS-S2S) de chuva e temperatura ficarem abaixo, normal ou acima da média nos próximos 7 trimestres.",
+  "viz_type": "nmme_terciles",
+  "status": "ONLINE_OPEN",
+  "http_status": 200,
+  "latency_ms": 13535,
+  "audit_notes": "Arquivos sazonais mais recentes detectados: prate.202611.prob.seas.nc e tmp2m.202611.prob.seas.nc (5348 KB cada).",
+  "error": null,
+  "extracted_at": "2026-11-14T15:35:03.328550+00:00",
+  "raw_sample": "NetCDF Variables: ['lon', 'lat', 'target', 'initial_time', 'prob_above', 'prob_norm', 'prob_below']\nArquivo Precipitação: prate.202611.prob.seas.nc\nArquivo Temperatura: tmp2m.202611.prob.seas.nc\nCélula extraída para Rio Verde/GO: {'season': 'OND 2026', 'grid_lat': -18.0, 'grid_lon': -51.0, 'prob_below': 52.2, 'prob_norm': 26.1, 'prob_above': 21.7}",
+  "parsed_data": {
+    "prate_file": "prate.202611.prob.seas.nc",
+    "tmp2m_file": "tmp2m.202611.prob.seas.nc",
+    "precipitation_terciles": [
+      {
+        "season": "OND 2026",
+        "grid_lat": -18.0,
+        "grid_lon": -51.0,
+        "prob_below": 52.2,
+        "prob_norm": 26.1,
+        "prob_above": 21.7
+      },
+      {
+        "season": "NDJ 2026",
+        "grid_lat": -18.0,
+        "grid_lon": -51.0,
+        "prob_below": 45.7,
+        "prob_norm": 33.7,
+        "prob_above": 20.7
+      },
+      {
+        "season": "DJF 2027",
+        "grid_lat": -18.0,
+        "grid_lon": -51.0,
+        "prob_below": 52.2,
+        "prob_norm": 21.7,
+        "prob_above": 26.1
+      },
+      {
+        "season": "JFM 2027",
+        "grid_lat": -18.0,
+        "grid_lon": -51.0,
+        "prob_below": 44.6,
+        "prob_norm": 30.4,
+        "prob_above": 25.0
+      },
+      {
+        "season": "FMA 2027",
+        "grid_lat": -18.0,
+        "grid_lon": -51.0,
+        "prob_below": 42.4,
+        "prob_norm": 21.7,
+        "prob_above": 35.9
+      },
+      {
+        "season": "MAM 2027",
+        "grid_lat": -18.0,
+        "grid_lon": -51.0,
+        "prob_below": 31.5,
+        "prob_norm": 26.1,
+        "prob_above": 42.4
+      },
+      {
+        "season": "AMJ 2027",
+        "grid_lat": -18.0,
+        "grid_lon": -51.0,
+        "prob_below": 51.1,
+        "prob_norm": 25.0,
+        "prob_above": 23.9
+      }
+    ],
+    "temperature_terciles": [
+      {
+        "season": "OND 2026",
+        "grid_lat": -18.0,
+        "grid_lon": -51.0,
+        "prob_below": 0.0,
+        "prob_norm": 0.0,
+        "prob_above": 100.0
+      },
+      {
+        "season": "NDJ 2026",
+        "grid_lat": -18.0,
+        "grid_lon": -51.0,
+        "prob_below": 0.0,
+        "prob_norm": 0.0,
+        "prob_above": 100.0
+      },
+      {
+        "season": "DJF 2027",
+        "grid_lat": -18.0,
+        "grid_lon": -51.0,
+        "prob_below": 0.0,
+        "prob_norm": 0.0,
+        "prob_above": 100.0
+      },
+      {
+        "season": "JFM 2027",
+        "grid_lat": -18.0,
+        "grid_lon": -51.0,
+        "prob_below": 0.0,
+        "prob_norm": 0.0,
+        "prob_above": 100.0
+      },
+      {
+        "season": "FMA 2027",
+        "grid_lat": -18.0,
+        "grid_lon": -51.0,
+        "prob_below": 0.0,
+        "prob_norm": 0.0,
+        "prob_above": 100.0
+      },
+      {
+        "season": "MAM 2027",
+        "grid_lat": -18.0,
+        "grid_lon": -51.0,
+        "prob_below": 1.1,
+        "prob_norm": 4.3,
+        "prob_above": 94.6
+      },
+      {
+        "season": "AMJ 2027",
+        "grid_lat": -18.0,
+        "grid_lon": -51.0,
+        "prob_below": 10.9,
+        "prob_norm": 9.8,
+        "prob_above": 79.3
+      }
+    ]
+  }
+}

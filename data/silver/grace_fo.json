@@ -1,0 +1,36 @@
+{
+  "id": "grace_fo",
+  "name": "NASA GRACE-FO – Indicadores de Aquífero e Seca Profunda",
+  "provider": "NASA JPL & National Drought Mitigation Center (UNL)",
+  "layer": "3. Solo & Água",
+  "url": "https://nasagrace.unl.edu/",
+  "auth_required": "Nenhum (Portal, WMS e GeoTIFFs semanais públicos)",
+  "expected_format": "HTML / WMS / GeoTIFF",
+  "actual_format": "text/html + GeoTIFF/WMS",
+  "spatial_resolution": "0.25° x 0.25° (~27 km)",
+  "temporal_resolution": "Semanal",
+  "coverage": "Global",
+  "data_nature": "Dado Fatídico (Gravimetria Orbital)",
+  "period_min": "Abr/2002",
+  "period_max": "Semanal (2026)",
+  "plain_question": "O lençol freático da região está secando (risco para pivôs de irrigação)?",
+  "plain_answer": "Portal público ativo com mapas semanais de água subterrânea; útil apenas se a fazenda usar irrigação.",
+  "fit_score": 3,
+  "fit_analysis": "Mais relevante para fazendas com pivô central de irrigação (monitoramento de recarga do lençol freático em secas severas). Menos determinante para agricultura 100% de sequeiro.",
+  "viz_type": "audit_summary",
+  "status": "ONLINE_OPEN",
+  "http_status": 200,
+  "latency_ms": 986,
+  "audit_notes": "Portal operacional. Para ingestão automatizada, recomenda-se consumir o GeoTIFF semanal de Root Zone/Groundwater.",
+  "error": null,
+  "extracted_at": "2026-11-14T15:35:52.147154+00:00",
+  "raw_sample": "Title: Home | NASA Grace\nLinks: ['/ConusData.aspx', '/GlobalData.aspx', 'https://drought.unl.edu']",
+  "parsed_data": {
+    "portal_title": "Home | NASA Grace",
+    "discovered_links": [
+      "/ConusData.aspx",
+      "/GlobalData.aspx",
+      "https://drought.unl.edu"
+    ]
+  }
+}

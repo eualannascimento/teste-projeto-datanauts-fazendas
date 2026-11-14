@@ -1,0 +1,69 @@
+{
+  "id": "cmr_gldas",
+  "name": "NASA GLDAS – Hidrologia Estratificada (0–200 cm)",
+  "provider": "NASA GSFC Hydrological Sciences Lab",
+  "layer": "3. Solo & Água",
+  "url": "https://cmr.earthdata.nasa.gov/search/granules.json",
+  "auth_required": "Descoberta CMR Aberta | Download NetCDF exige Earthdata Login",
+  "expected_format": "JSON (CMR) -> NetCDF4",
+  "actual_format": "application/json (CMR) -> NetCDF4 (.nc4)",
+  "spatial_resolution": "0.25° x 0.25° (~27 km)",
+  "temporal_resolution": "3 horas / Mensal",
+  "coverage": "Global (4 camadas: 0–10, 10–40, 40–100, 100–200 cm)",
+  "data_nature": "Simulação Hidrológica (Modelo Noah)",
+  "period_min": "Jan/2000",
+  "period_max": "Tempo Quase Real (2026)",
+  "plain_question": "Existe água guardada nas camadas profundas (até 2m) para sustentar Sorgo ou Algodão?",
+  "plain_answer": "Modelo estratificado até 2 metros de profundidade confirmado para Rio Verde no catálogo CMR.",
+  "fit_score": 4,
+  "fit_analysis": "Diferencia a disponibilidade hídrica em profundidade para comparar milho (raiz mais rasa) contra sorgo e algodão (que exploram reserva até 1,5–2,0 metros).",
+  "viz_type": "cmr_granules",
+  "status": "ONLINE_DISCOVERY_ONLY",
+  "http_status": 200,
+  "latency_ms": 590,
+  "audit_notes": "Cobertura contínua confirmada via CMR. Download no GES DISC requer Earthdata Token.",
+  "error": null,
+  "extracted_at": "2026-11-14T15:35:51.553373+00:00",
+  "raw_sample": "[\n  {\n    \"id\": \"GLDAS_NOAH025_3H.2.1:GLDAS_NOAH025_3H.A20260731.2100.021.nc4\",\n    \"start\": \"2026-07-31T21:00:00.000Z\",\n    \"end\": \"2026-07-31T21:00:00.000Z\",\n    \"size_mb\": \"21.2247314453125\",\n    \"download_url\": \"https://data.gesdisc.earthdata.nasa.gov/data/GLDAS/GLDAS_NOAH025_3H.2.1/2026/212/GLDAS_NOAH025_3H.A20260731.2100.021.nc4\"\n  },\n  {\n    \"id\": \"GLDAS_NOAH025_3H.2.1:GLDAS_NOAH025_3H.A20260731.1800.021.nc4\",\n    \"start\": \"2026-07-31T18:00:00.000Z\",\n    \"end\": \"2026-07-31T18:00:00.000Z\",\n    \"size_mb\": \"21.3994283676147\",\n    \"download_url\": \"https://data.gesdisc.earthdata.nasa.gov/data/GLDAS/GLDAS_NOAH025_3H.2.1/2026/212/GLDAS_NOAH025_3H.A20260731.1800.021.nc4\"\n  }\n]",
+  "parsed_data": {
+    "collection": "GLDAS_NOAH025_3H v2.1",
+    "granules_found": 5,
+    "granules": [
+      {
+        "id": "GLDAS_NOAH025_3H.2.1:GLDAS_NOAH025_3H.A20260731.2100.021.nc4",
+        "start": "2026-07-31T21:00:00.000Z",
+        "end": "2026-07-31T21:00:00.000Z",
+        "size_mb": "21.2247314453125",
+        "download_url": "https://data.gesdisc.earthdata.nasa.gov/data/GLDAS/GLDAS_NOAH025_3H.2.1/2026/212/GLDAS_NOAH025_3H.A20260731.2100.021.nc4"
+      },
+      {
+        "id": "GLDAS_NOAH025_3H.2.1:GLDAS_NOAH025_3H.A20260731.1800.021.nc4",
+        "start": "2026-07-31T18:00:00.000Z",
+        "end": "2026-07-31T18:00:00.000Z",
+        "size_mb": "21.3994283676147",
+        "download_url": "https://data.gesdisc.earthdata.nasa.gov/data/GLDAS/GLDAS_NOAH025_3H.2.1/2026/212/GLDAS_NOAH025_3H.A20260731.1800.021.nc4"
+      },
+      {
+        "id": "GLDAS_NOAH025_3H.2.1:GLDAS_NOAH025_3H.A20260731.1500.021.nc4",
+        "start": "2026-07-31T15:00:00.000Z",
+        "end": "2026-07-31T15:00:00.000Z",
+        "size_mb": "21.5870695114136",
+        "download_url": "https://data.gesdisc.earthdata.nasa.gov/data/GLDAS/GLDAS_NOAH025_3H.2.1/2026/212/GLDAS_NOAH025_3H.A20260731.1500.021.nc4"
+      },
+      {
+        "id": "GLDAS_NOAH025_3H.2.1:GLDAS_NOAH025_3H.A20260731.1200.021.nc4",
+        "start": "2026-07-31T12:00:00.000Z",
+        "end": "2026-07-31T12:00:00.000Z",
+        "size_mb": "21.7043170928955",
+        "download_url": "https://data.gesdisc.earthdata.nasa.gov/data/GLDAS/GLDAS_NOAH025_3H.2.1/2026/212/GLDAS_NOAH025_3H.A20260731.1200.021.nc4"
+      },
+      {
+        "id": "GLDAS_NOAH025_3H.2.1:GLDAS_NOAH025_3H.A20260731.0900.021.nc4",
+        "start": "2026-07-31T09:00:00.000Z",
+        "end": "2026-07-31T09:00:00.000Z",
+        "size_mb": "21.486780166626",
+        "download_url": "https://data.gesdisc.earthdata.nasa.gov/data/GLDAS/GLDAS_NOAH025_3H.2.1/2026/212/GLDAS_NOAH025_3H.A20260731.0900.021.nc4"
+      }
+    ]
+  }
+}

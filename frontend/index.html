@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AgroPulse NASA — Clima, El Niño e Decisão Agrícola</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark">AP</div>
+      <div>
+        <h1 class="brand-title">AgroPulse NASA — Radar Climático &amp; Decisão Agrícola</h1>
+        <p class="brand-sub" id="anchorLabel">Fazenda Piloto Rio Verde/GO (Zona Rural) • -17.84°, -51.02° • IBGE 5218805</p>
+      </div>
+    </div>
+
+    <div class="topbar-controls">
+      <div class="telemetry-strip" id="telemetryStrip"></div>
+      <nav class="view-tabs" aria-label="Navegação principal">
+        <button class="view-tab active" data-view="home">1. Início: Entenda o Sistema</button>
+        <button class="view-tab" data-view="etl">2. Explorar as 21 Fontes</button>
+        <button class="view-tab" data-view="simulator">3. Simulador Risco × Retorno</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- PÁGINA INICIAL: VISÃO GERAL PARA QUALQUER PESSOA ENTENDER -->
+  <section class="home-container" id="homeView"></section>
+
+  <!-- EXPLORADOR DETALHADO DE CADA UMA DAS 21 BASES -->
+  <main class="shell hidden" id="etlView">
+    <aside class="sidebar">
+      <input type="search" id="sourceFilter" class="sidebar-search" placeholder="Buscar base (ex: El Niño, Solo, Milho, ZARC)..." />
+      <div id="sourceList"></div>
+    </aside>
+
+    <section class="stage" id="sourceStage">
+      <div class="viz-card">Carregando dados do pipeline ETL...</div>
+    </section>
+  </main>
+
+  <!-- SIMULADOR ECONÔMICO INTEGRADO -->
+  <section class="sim-container hidden" id="simulatorView"></section>
+
+  <!-- Bundle JS local para funcionar 100% no GitHub Pages, HTTP local e file:// -->
+  <script src="bundle.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

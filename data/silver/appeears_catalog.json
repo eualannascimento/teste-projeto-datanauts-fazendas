@@ -1,0 +1,68 @@
+{
+  "id": "appeears_catalog",
+  "name": "NASA AppEEARS – Catálogo Unificado de Extração Pontual",
+  "provider": "NASA LP DAAC / Earthdata Cloud",
+  "layer": "4. Fenologia & Talhão",
+  "url": "https://appeears.earthdatacloud.nasa.gov/api/product",
+  "auth_required": "Catálogo Aberto | Submissão de Tarefa (/task) exige Earthdata Token",
+  "expected_format": "JSON (Catálogo) -> CSV / GeoTIFF (Assíncrono)",
+  "actual_format": "application/json",
+  "spatial_resolution": "Multi-escala (30m a 9 km dependendo do produto)",
+  "temporal_resolution": "Diária / 8 dias / 16 dias / Anual",
+  "coverage": "194 produtos oficiais da NASA (MODIS, VIIRS, SMAP, ECOSTRESS)",
+  "data_nature": "Catálogo / Extrator Unificado",
+  "period_min": "2000 (MODIS)",
+  "period_max": "Tempo Quase Real (2026)",
+  "plain_question": "Como extrair só a série CSV da fazenda sem precisar baixar gigabytes de imagens da NASA?",
+  "plain_answer": "O catálogo ativo lista 193 produtos prontos para recorte pontual por coordenada via API (com Token Earthdata).",
+  "fit_score": 5,
+  "fit_analysis": "O 'atalho de ouro' da engenharia de dados NASA: em vez de baixar arquivos HDF5 de 500 MB, o AppEEARS extrai somente o CSV da coordenada exata da fazenda para MODIS Phenology (MCD12Q2), NDVI (MOD13Q1), SMAP e ECOSTRESS.",
+  "viz_type": "appeears_products",
+  "status": "ONLINE_OPEN",
+  "http_status": 200,
+  "latency_ms": 710,
+  "audit_notes": "Catálogo ativo com 193 produtos oficiais disponíveis via API REST.",
+  "error": null,
+  "extracted_at": "2026-11-14T15:35:54.822146+00:00",
+  "raw_sample": "[\n  {\n    \"product_id\": \"MCD12Q2.061\",\n    \"description\": \"Land Cover Dynamics\",\n    \"resolution\": \"500m\",\n    \"temporal\": \"Yearly\",\n    \"platform\": \"Combined MODIS\"\n  },\n  {\n    \"product_id\": \"MOD13Q1.061\",\n    \"description\": \"Vegetation Indices (NDVI & EVI)\",\n    \"resolution\": \"250m\",\n    \"temporal\": \"16 day\",\n    \"platform\": \"Terra MODIS\"\n  },\n  {\n    \"product_id\": \"SPL4SMGP.008\",\n    \"description\": \"Surface and Root Zone Soil Moisture\",\n    \"resolution\": \"9000m\",\n    \"temporal\": \"Daily\",\n    \"platform\": \"SMAP\"\n  }\n]",
+  "parsed_data": {
+    "total_products": 193,
+    "agro_recommended": [
+      {
+        "product_id": "MCD12Q2.061",
+        "description": "Land Cover Dynamics",
+        "resolution": "500m",
+        "temporal": "Yearly",
+        "platform": "Combined MODIS"
+      },
+      {
+        "product_id": "MOD13Q1.061",
+        "description": "Vegetation Indices (NDVI & EVI)",
+        "resolution": "250m",
+        "temporal": "16 day",
+        "platform": "Terra MODIS"
+      },
+      {
+        "product_id": "SPL4SMGP.008",
+        "description": "Surface and Root Zone Soil Moisture",
+        "resolution": "9000m",
+        "temporal": "Daily",
+        "platform": "SMAP"
+      },
+      {
+        "product_id": "ECO_L3T_JET.002",
+        "description": "Tiled Evapotranspiration Instantaneous and Daytime L3 Global",
+        "resolution": "70m",
+        "temporal": "ISS-dependent",
+        "platform": "ECOSTRESS"
+      },
+      {
+        "product_id": "VNP13A1.002",
+        "description": "Vegetation Indices (NDVI & EVI)",
+        "resolution": "500m",
+        "temporal": "16 day",
+        "platform": "Suomi NPP VIIRS"
+      }
+    ]
+  }
+}
