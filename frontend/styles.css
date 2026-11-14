@@ -818,4 +818,72 @@ body {
   .audit-grid, .hero-highlights, .rotare-setup-grid, .rotare-form-grid { grid-template-columns: 1fr; }
   .scenario-grid { grid-template-columns: 1fr; }
   .hbar-row { grid-template-columns: 120px 1fr 90px; }
+  .maptiler-grid, .maptiler-multi { grid-template-columns: 1fr !important; }
+}
+
+/* MapTiler Region Image Studio */
+.maptiler-grid {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 18px;
+  align-items: start;
+}
+
+.maptiler-input {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--border-strong);
+  background: var(--bg);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: var(--ink);
+}
+
+.maptiler-img-frame {
+  background: #0f172a;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  min-height: 320px;
+  display: grid;
+  place-items: center;
+  position: relative;
+}
+
+.maptiler-img-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 580px;
+  object-fit: contain;
+}
+
+.maptiler-multi {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.maptiler-thumb {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.maptiler-thumb img {
+  width: 100%;
+  display: block;
+  height: auto;
+}
+
+.maptiler-thumb-cap {
+  padding: 6px 10px;
+  font-size: 12px;
+  font-weight: 700;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
 }

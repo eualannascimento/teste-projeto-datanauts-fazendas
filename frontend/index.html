@@ -23,6 +23,7 @@
         <button class="view-tab" data-view="etl">2. Explorar as 22 Fontes</button>
         <button class="view-tab" data-view="simulator">3. Simulador Risco × Retorno</button>
         <button class="view-tab" data-view="rotare">4. Caso de Uso: Rotare (El Niño)</button>
+        <button class="view-tab" data-view="maptiler">5. Mapa da Região (MapTiler)</button>
       </nav>
     </div>
   </header>
@@ -48,7 +49,11 @@
   <!-- CASO DE USO ROTARE COM EL NIÑO -->
   <section class="home-container hidden" id="rotareView"></section>
 
+  <!-- REQUISITOR DE MAPAS & IMAGENS DE REGIÃO (MAPTILER CLOUD) -->
+  <section class="home-container hidden" id="maptilerView"></section>
+
   <!-- Bundle JS local para funcionar 100% no GitHub Pages, HTTP local e file:// -->
+  <script src="maptiler_config.js"></script>
   <script src="bundle.js"></script>
   <script src="app.js"></script>
 </body>

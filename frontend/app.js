@@ -864,6 +864,7 @@
     document.getElementById("etlView").classList.toggle("hidden", mode !== "etl");
     document.getElementById("simulatorView").classList.toggle("hidden", mode !== "simulator");
     document.getElementById("rotareView").classList.toggle("hidden", mode !== "rotare");
+    document.getElementById("maptilerView")?.classList.toggle("hidden", mode !== "maptiler");
   }
 
   /* 1. TELA INICIAL PARA LEIGOS */
@@ -1746,6 +1747,463 @@
     draw();
   }
 
+  /* 5. MAPA DA REGIÃO & IMAGENS DE SATÉLITE (MAPTILER CLOUD API) */
+  function renderMapTilerStudio(bundle) {
+    const container = document.getElementById("maptilerView");
+    if (!container) return;
+
+    const anchor = bundle.anchor_farm || { lat: -17.84, lon: -51.02, name: "Rio Verde/GO" };
+    const safeGetLS = (k) => {
+      try {
+        return typeof window.localStorage !== "undefined" ? window.localStorage.getItem(k) : "";
+      } catch (_) {
+        return "";
+      }
+    };
+    const safeSetLS = (k, v) => {
+      try {
+        if (typeof window.localStorage !== "undefined") window.localStorage.setItem(k, v);
+      } catch (_) {}
+    };
+
+    const configKey = (window.MAPTILER_CONFIG && window.MAPTILER_CONFIG.apiKey) || "";
+    const state = {
+      apiKey: safeGetLS("agropulse_maptiler_key") || configKey || "",
+      query: "Rio Verde, Goiás",
+      lat: Number(anchor.lat ?? -17.84),
+      lon: Number(anchor.lon ?? -51.02),
+      zoom: 12.5,
+      bboxRadiusDeg: 0.025, // ~5,5 km x 5,5 km ao redor da coordenada
+      mode: "center", // "center" | "bbox_auto"
+      style: "hybrid", // "satellite" | "hybrid" | "outdoor-v2" | "topo-v2" | "streets-v2" | "basic-v2"
+      format: "jpg", // "jpg" | "png" | "webp"
+      size: "900x540",
+      retina: false,
+      showMarker: true,
+      showBoxPath: false,
+      compareMulti: true,
+      geocodeResults: [],
+      reverseLabel: "",
+      statusMsg: "",
+      statusErr: "",
+      loadedBytes: null,
+      loadingGeo: false,
+    };
+
+    const presets = [
+      { label: "Fazenda Piloto Rio Verde/GO", lat: -17.84, lon: -51.02, zoom: 13 },
+      { label: "Santarém/PA (Norte)", lat: -2.443, lon: -54.708, zoom: 11.5 },
+      { label: "Paragominas/PA (Norte)", lat: -2.996, lon: -47.353, zoom: 12 },
+      { label: "Pedro Afonso/TO (Norte)", lat: -8.969, lon: -48.175, zoom: 12.5 },
+      { label: "Sorriso/MT (Centro-Oeste)", lat: -12.542, lon: -55.721, zoom: 12 },
+    ];
+
+    const styleOptions = [
+      { id: "satellite", label: "Satélite Puro (Alta Res. 1–2m)" },
+      { id: "hybrid", label: "Híbrido (Satélite + Estradas & Cidades)" },
+      { id: "outdoor-v2", label: "Topográfico / Relevo (Outdoor)" },
+      { id: "topo-v2", label: "Carta Topográfica (Curvas de Nível)" },
+      { id: "streets-v2", label: "Mapa Rodoviário / Urbano (Streets)" },
+      { id: "basic-v2", label: "Mapa Base Limpo (Basic)" },
+    ];
+
+    const buildStaticUrl = (styleId, keyVal) => {
+      const k = (keyVal || "SUA_MAPTILER_API_KEY").trim();
+      const scale = state.retina ? "@2x" : "";
+      const lon = Number(state.lon).toFixed(5);
+      const lat = Number(state.lat).toFixed(5);
+      const r = Number(state.bboxRadiusDeg) || 0.025;
+      const minLon = (Number(state.lon) - r).toFixed(5);
+      const maxLon = (Number(state.lon) + r).toFixed(5);
+      const minLat = (Number(state.lat) - r).toFixed(5);
+      const maxLat = (Number(state.lat) + r).toFixed(5);
+
+      const areaSeg = state.mode === "bbox_auto" ? "auto" : `${lon},${lat},${state.zoom}`;
+      const params = [`key=${encodeURIComponent(k)}`];
+      if (state.showMarker || state.mode === "bbox_auto") {
+        params.push(`markers=${lon},${lat},%23b91c1c`);
+      }
+      if (state.showBoxPath || state.mode === "bbox_auto") {
+        params.push(
+          `path=stroke:%2315803d|width:3|${minLon},${minLat}|${maxLon},${minLat}|${maxLon},${maxLat}|${minLon},${maxLat}|${minLon},${minLat}`
+        );
+      }
+      return `https://api.maptiler.com/maps/${styleId}/static/${areaSeg}/${state.size}${scale}.${state.format}?${params.join("&")}`;
+    };
+
+    const draw = () => {
+      const activeKey = state.apiKey.trim();
+      const hasKey = Boolean(activeKey);
+      const mainUrl = buildStaticUrl(state.style, activeKey);
+      const maskedUrl = buildStaticUrl(state.style, hasKey ? `${activeKey.slice(0, 4)}...${activeKey.slice(-3)}` : "SUA_API_KEY");
+
+      const multiHtml =
+        hasKey && state.compareMulti
+          ? `
+          <div class="maptiler-multi">
+            ${[
+              { id: "satellite", name: "Satélite Puro" },
+              { id: "hybrid", name: "Híbrido (Satélite + Vias)" },
+              { id: "outdoor-v2", name: "Relevo / Topográfico" },
+            ]
+              .map(
+                (st) => `
+              <div class="maptiler-thumb">
+                <img src="${esc(buildStaticUrl(st.id, activeKey))}" alt="${esc(st.name)}" loading="lazy" />
+                <div class="maptiler-thumb-cap">
+                  <span>${esc(st.name)}</span>
+                  <span class="num" style="color:var(--ink-muted)">${esc(st.id)}</span>
+                </div>
+              </div>
+            `
+              )
+              .join("")}
+          </div>
+        `
+          : "";
+
+      container.innerHTML = `
+        <div class="hero-card" style="padding:20px 24px;margin-bottom:18px">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap">
+            <div>
+              <h2 style="margin:0 0 6px;font-size:21px">Requisitor de Imagens &amp; Mapas Regionais — MapTiler Cloud API</h2>
+              <p style="margin:0;font-size:13.5px;color:var(--ink-muted)">
+                Informe <strong>nome de cidade/região</strong> (Geocoding API) ou <strong>Latitude / Longitude / Área (BBox)</strong> para gerar e baixar imagens reais de <strong>Satélite, Híbrido, Relevo Topográfico e Rodoviário</strong> direto da MapTiler Cloud.
+              </p>
+            </div>
+            <span class="period-pill num">Origin recomendada: https://eualannascimento.github.io/*</span>
+          </div>
+        </div>
+
+        <div class="maptiler-grid">
+          <!-- Painel de Parâmetros -->
+          <div class="viz-card" style="margin-bottom:0">
+            <h3 style="margin-bottom:12px">1. Credencial &amp; Alvo Geográfico</h3>
+
+            <div style="margin-bottom:12px">
+              <label style="display:block;font-size:12px;font-weight:700;margin-bottom:4px" for="mtApiKey">MapTiler API Key</label>
+              <div style="display:flex;gap:6px">
+                <input id="mtApiKey" class="maptiler-input num" type="text" placeholder="Cole sua chave MapTiler aqui..." value="${esc(state.apiKey)}" />
+                <button id="mtSaveKeyBtn" class="filter-pill active" type="button" style="white-space:nowrap">Usar Chave</button>
+              </div>
+              <div style="font-size:11px;color:var(--ink-muted);margin-top:4px">
+                ${configKey ? "Chave de teste carregada de <code>maptiler_config.js</code>." : "Salva apenas no navegador (localStorage) ou defina em <code>frontend/maptiler_config.js</code> antes do push."}
+              </div>
+            </div>
+
+            <div style="margin-bottom:12px;padding-top:10px;border-top:1px solid var(--border)">
+              <label style="display:block;font-size:12px;font-weight:700;margin-bottom:4px" for="mtSearchInput">Buscar por Nome (Cidade, Estado ou Local — Geocoding)</label>
+              <div style="display:flex;gap:6px">
+                <input id="mtSearchInput" class="maptiler-input" type="text" placeholder="Ex: Santarém, PA ou Rio Verde, GO" value="${esc(state.query)}" />
+                <button id="mtSearchBtn" class="filter-pill" type="button" style="white-space:nowrap">${state.loadingGeo ? "Buscando..." : "Buscar"}</button>
+              </div>
+              ${
+                state.geocodeResults.length
+                  ? `<div style="margin-top:6px;display:grid;gap:4px">
+                      ${state.geocodeResults
+                        .map(
+                          (f, idx) => `
+                        <button type="button" class="filter-pill" data-geo-idx="${idx}" style="text-align:left;width:100%;font-size:11.5px">
+                          📍 ${esc(f.place_name)} <span class="num" style="opacity:0.75">(${f.center[1].toFixed(3)}, ${f.center[0].toFixed(3)})</span>
+                        </button>`
+                        )
+                        .join("")}
+                     </div>`
+                  : ""
+              }
+            </div>
+
+            <div style="margin-bottom:12px">
+              <div style="font-size:11.5px;font-weight:700;color:var(--ink-muted);margin-bottom:5px">Atalhos Rápidos (Norte &amp; Centro-Oeste):</div>
+              <div style="display:flex;gap:5px;flex-wrap:wrap">
+                ${presets
+                  .map(
+                    (p, idx) =>
+                      `<button type="button" class="filter-pill" data-mt-preset="${idx}" style="font-size:11px;padding:4px 8px">${esc(p.label)}</button>`
+                  )
+                  .join("")}
+              </div>
+            </div>
+
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">
+              <div>
+                <label style="display:block;font-size:11.5px;font-weight:700;margin-bottom:3px" for="mtLat">Latitude</label>
+                <input id="mtLat" class="maptiler-input num" type="number" step="0.001" value="${state.lat}" />
+              </div>
+              <div>
+                <label style="display:block;font-size:11.5px;font-weight:700;margin-bottom:3px" for="mtLon">Longitude</label>
+                <input id="mtLon" class="maptiler-input num" type="number" step="0.001" value="${state.lon}" />
+              </div>
+            </div>
+
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">
+              <div>
+                <label style="display:block;font-size:11.5px;font-weight:700;margin-bottom:3px" for="mtMode">Enquadramento</label>
+                <select id="mtMode" class="maptiler-input">
+                  <option value="center" ${state.mode === "center" ? "selected" : ""}>Ponto Central + Zoom</option>
+                  <option value="bbox_auto" ${state.mode === "bbox_auto" ? "selected" : ""}>Polígono da Área (Auto-Fit)</option>
+                </select>
+              </div>
+              <div>
+                <label style="display:block;font-size:11.5px;font-weight:700;margin-bottom:3px" for="mtZoom">${state.mode === "bbox_auto" ? "Raio Caixa (°)" : "Zoom (1–18)"}</label>
+                ${
+                  state.mode === "bbox_auto"
+                    ? `<input id="mtRadius" class="maptiler-input num" type="number" step="0.005" min="0.005" max="1" value="${state.bboxRadiusDeg}" />`
+                    : `<input id="mtZoom" class="maptiler-input num" type="number" step="0.5" min="2" max="18" value="${state.zoom}" />`
+                }
+              </div>
+            </div>
+
+            <div style="margin-bottom:10px">
+              <label style="display:block;font-size:11.5px;font-weight:700;margin-bottom:3px" for="mtStyle">Tipo de Mapa / Camada</label>
+              <select id="mtStyle" class="maptiler-input">
+                ${styleOptions.map((o) => `<option value="${o.id}" ${state.style === o.id ? "selected" : ""}>${esc(o.label)}</option>`).join("")}
+              </select>
+            </div>
+
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">
+              <div>
+                <label style="display:block;font-size:11.5px;font-weight:700;margin-bottom:3px" for="mtSize">Resolução (px)</label>
+                <select id="mtSize" class="maptiler-input">
+                  <option value="900x540" ${state.size === "900x540" ? "selected" : ""}>900×540 (Widescreen)</option>
+                  <option value="1024x1024" ${state.size === "1024x1024" ? "selected" : ""}>1024×1024 (Quadrado)</option>
+                  <option value="1200x700" ${state.size === "1200x700" ? "selected" : ""}>1200×700 (HD)</option>
+                </select>
+              </div>
+              <div>
+                <label style="display:block;font-size:11.5px;font-weight:700;margin-bottom:3px" for="mtFormat">Formato Imagem</label>
+                <select id="mtFormat" class="maptiler-input">
+                  <option value="jpg" ${state.format === "jpg" ? "selected" : ""}>JPG (Satélite Leve)</option>
+                  <option value="png" ${state.format === "png" ? "selected" : ""}>PNG (Sem Perdas)</option>
+                  <option value="webp" ${state.format === "webp" ? "selected" : ""}>WebP</option>
+                </select>
+              </div>
+            </div>
+
+            <div style="display:flex;gap:12px;flex-wrap:wrap;font-size:12px;margin:10px 0 14px">
+              <label><input id="mtMarkerChk" type="checkbox" ${state.showMarker ? "checked" : ""} /> Marcador GPS</label>
+              <label><input id="mtBoxChk" type="checkbox" ${state.showBoxPath ? "checked" : ""} /> Polígono Talhão</label>
+              <label><input id="mtRetinaChk" type="checkbox" ${state.retina ? "checked" : ""} /> Alta DPI (@2x)</label>
+              <label><input id="mtMultiChk" type="checkbox" ${state.compareMulti ? "checked" : ""} /> Comparar 3 Estilos</label>
+            </div>
+
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <button id="mtFetchBtn" class="filter-pill active" type="button" style="flex:1;padding:9px 12px">Gerar &amp; Testar Requisição MapTiler</button>
+            </div>
+          </div>
+
+          <!-- Painel de Resultado Visual -->
+          <div class="viz-card" style="margin-bottom:0">
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px">
+              <div>
+                <h3 style="margin:0">2. Imagem Retornada pela API MapTiler</h3>
+                <div style="font-size:12px;color:var(--ink-muted)">
+                  ${state.reverseLabel ? `Local detectado (Geocoding Reverso): <strong>${esc(state.reverseLabel)}</strong>` : `Coordenada atual: ${state.lat}, ${state.lon}`}
+                </div>
+              </div>
+              ${
+                hasKey
+                  ? `<a id="mtDownloadLink" href="${esc(mainUrl)}" target="_blank" rel="noopener" download="maptiler_${esc(state.style)}.${esc(state.format)}" class="filter-pill" style="text-decoration:none">Abrir / Baixar Imagem ↗</a>`
+                  : ""
+              }
+            </div>
+
+            ${state.statusErr ? `<div class="rotare-disclaimer" style="background:var(--crimson-soft);border-color:#fca5a5;color:#7f1d1d;margin-bottom:10px">${esc(state.statusErr)}</div>` : ""}
+            ${state.statusMsg ? `<div class="rotare-disclaimer" style="background:var(--emerald-soft);border-color:#86efac;color:#14532d;margin-bottom:10px">${esc(state.statusMsg)}</div>` : ""}
+
+            <div class="maptiler-img-frame">
+              ${
+                hasKey
+                  ? `<img id="mtMainImg" src="${esc(mainUrl)}" alt="Mapa MapTiler da região selecionada" />`
+                  : `<div style="padding:36px 24px;text-align:center;color:#e2e8f0;max-width:460px">
+                      <div style="font-size:15px;font-weight:700;margin-bottom:8px">Informe ou cole sua MapTiler API Key à esquerda</div>
+                      <p style="margin:0;font-size:12.5px;color:#94a3b8">
+                        Você também pode enviar a chave de teste para salvá-la em <code>frontend/maptiler_config.js</code> e publicar direto no GitHub Pages com restrição por domínio (<code>https://eualannascimento.github.io/*</code>).
+                      </p>
+                     </div>`
+              }
+            </div>
+
+            ${multiHtml}
+
+            <div style="margin-top:14px">
+              <div style="font-size:12px;font-weight:700;margin-bottom:4px">Endpoint Static Maps Gerado (chave mascarada para visualização):</div>
+              <div class="raw-box" style="margin-top:0;max-height:110px">${esc(maskedUrl)}</div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      const syncCoordInputs = () => {
+        const kV = container.querySelector("#mtApiKey")?.value;
+        if (kV !== undefined) state.apiKey = kV.trim();
+        const qV = container.querySelector("#mtSearchInput")?.value;
+        if (qV !== undefined) state.query = qV;
+        const latV = Number(container.querySelector("#mtLat")?.value);
+        const lonV = Number(container.querySelector("#mtLon")?.value);
+        if (!Number.isNaN(latV)) state.lat = latV;
+        if (!Number.isNaN(lonV)) state.lon = lonV;
+        const zV = Number(container.querySelector("#mtZoom")?.value);
+        if (!Number.isNaN(zV)) state.zoom = zV;
+        const rV = Number(container.querySelector("#mtRadius")?.value);
+        if (!Number.isNaN(rV)) state.bboxRadiusDeg = rV;
+      };
+
+      const runGeoSearch = async () => {
+        const keyVal = (container.querySelector("#mtApiKey")?.value || state.apiKey).trim();
+        const qVal = (container.querySelector("#mtSearchInput")?.value || state.query).trim();
+        state.apiKey = keyVal;
+        state.query = qVal;
+        safeSetLS("agropulse_maptiler_key", keyVal);
+        if (!keyVal) {
+          state.statusErr = "Cole sua MapTiler API Key antes de buscar no Geocoding.";
+          state.statusMsg = "";
+          draw();
+          return;
+        }
+        if (!qVal || typeof fetch === "undefined") return;
+        state.loadingGeo = true;
+        state.statusErr = "";
+        draw();
+        try {
+          const url = `https://api.maptiler.com/geocoding/${encodeURIComponent(qVal)}.json?key=${encodeURIComponent(keyVal)}&country=br&language=pt&limit=5`;
+          const resp = await fetch(url);
+          if (!resp.ok) throw new Error(`HTTP ${resp.status} no Geocoding MapTiler`);
+          const data = await resp.json();
+          state.geocodeResults = data.features || [];
+          if (state.geocodeResults[0]) {
+            const first = state.geocodeResults[0];
+            state.lon = Number(first.center[0].toFixed(5));
+            state.lat = Number(first.center[1].toFixed(5));
+            state.reverseLabel = first.place_name || qVal;
+            state.statusMsg = `Local encontrado: ${state.reverseLabel} (${state.geocodeResults.length} opções).`;
+          } else {
+            state.statusErr = "Nenhum local encontrado no Brasil para essa busca.";
+          }
+        } catch (err) {
+          state.statusErr = `Erro no Geocoding: ${err.message}`;
+        } finally {
+          state.loadingGeo = false;
+          draw();
+        }
+      };
+
+      const testImageAndReverse = async () => {
+        const keyVal = (container.querySelector("#mtApiKey")?.value || "").trim();
+        state.apiKey = keyVal;
+        safeSetLS("agropulse_maptiler_key", keyVal);
+        syncCoordInputs();
+        if (!keyVal) {
+          state.statusErr = "Cole sua MapTiler API Key para testar a requisição.";
+          state.statusMsg = "";
+          draw();
+          return;
+        }
+        if (typeof fetch === "undefined") {
+          draw();
+          return;
+        }
+        state.statusErr = "";
+        state.statusMsg = "Requisitando imagem e geocodificação reversa na MapTiler Cloud...";
+        draw();
+        try {
+          const t0 = performance.now();
+          const imgResp = await fetch(buildStaticUrl(state.style, keyVal));
+          const ms = Math.round(performance.now() - t0);
+          if (!imgResp.ok) {
+            throw new Error(`HTTP ${imgResp.status} na API Static Maps (verifique a API Key ou Allowed HTTP Origins).`);
+          }
+          const blob = await imgResp.blob();
+          const kb = (blob.size / 1024).toFixed(1);
+
+          // Geocoding reverso para identificar Município / UF da coordenada
+          const revUrl = `https://api.maptiler.com/geocoding/${Number(state.lon).toFixed(5)},${Number(state.lat).toFixed(5)}.json?key=${encodeURIComponent(keyVal)}&language=pt`;
+          const revResp = await fetch(revUrl);
+          if (revResp.ok) {
+            const revJson = await revResp.json();
+            state.reverseLabel = revJson.features?.[0]?.place_name || state.reverseLabel;
+          }
+          state.statusMsg = `HTTP ${imgResp.status} OK • ${kb} KB recebidos em ${ms} ms (${state.style}.${state.format}).`;
+        } catch (err) {
+          state.statusErr = err.message;
+          state.statusMsg = "";
+        }
+        draw();
+      };
+
+      container.querySelector("#mtSaveKeyBtn")?.addEventListener("click", testImageAndReverse);
+      container.querySelector("#mtFetchBtn")?.addEventListener("click", testImageAndReverse);
+      container.querySelector("#mtSearchBtn")?.addEventListener("click", runGeoSearch);
+
+      container.querySelectorAll("[data-geo-idx]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const f = state.geocodeResults[Number(btn.dataset.geoIdx)];
+          if (!f) return;
+          state.lon = Number(f.center[0].toFixed(5));
+          state.lat = Number(f.center[1].toFixed(5));
+          state.reverseLabel = f.place_name || "";
+          state.statusMsg = `Coordenadas atualizadas para ${f.place_name}.`;
+          draw();
+        });
+      });
+
+      container.querySelectorAll("[data-mt-preset]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const p = presets[Number(btn.dataset.mtPreset)];
+          if (!p) return;
+          state.lat = p.lat;
+          state.lon = p.lon;
+          state.zoom = p.zoom;
+          state.reverseLabel = p.label;
+          draw();
+        });
+      });
+
+      container.querySelector("#mtMode")?.addEventListener("change", (e) => {
+        syncCoordInputs();
+        state.mode = e.target.value;
+        draw();
+      });
+      container.querySelector("#mtStyle")?.addEventListener("change", (e) => {
+        syncCoordInputs();
+        state.style = e.target.value;
+        draw();
+      });
+      container.querySelector("#mtSize")?.addEventListener("change", (e) => {
+        syncCoordInputs();
+        state.size = e.target.value;
+        draw();
+      });
+      container.querySelector("#mtFormat")?.addEventListener("change", (e) => {
+        syncCoordInputs();
+        state.format = e.target.value;
+        draw();
+      });
+      container.querySelector("#mtMarkerChk")?.addEventListener("change", (e) => {
+        syncCoordInputs();
+        state.showMarker = e.target.checked;
+        draw();
+      });
+      container.querySelector("#mtBoxChk")?.addEventListener("change", (e) => {
+        syncCoordInputs();
+        state.showBoxPath = e.target.checked;
+        draw();
+      });
+      container.querySelector("#mtRetinaChk")?.addEventListener("change", (e) => {
+        syncCoordInputs();
+        state.retina = e.target.checked;
+        draw();
+      });
+      container.querySelector("#mtMultiChk")?.addEventListener("change", (e) => {
+        syncCoordInputs();
+        state.compareMulti = e.target.checked;
+        draw();
+      });
+    };
+
+    draw();
+  }
+
   function initApp(bundle) {
     if (!bundle || !bundle.sources) {
       document.getElementById("homeView").innerHTML =
@@ -1834,6 +2292,7 @@
     if (sources[0]) renderSourceStage(sources[0]);
     renderSimulator(bundle);
     renderRotareUseCase(bundle);
+    renderMapTilerStudio(bundle);
 
     document.getElementById("sourceFilter").addEventListener("input", (e) => buildSidebar(e.target.value));
 
