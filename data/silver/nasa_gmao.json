@@ -20,10 +20,10 @@
   "viz_type": "audit_summary",
   "status": "ONLINE_OPEN",
   "http_status": 200,
-  "latency_ms": 1640,
+  "latency_ms": 1639,
   "audit_notes": "Portal GMAO e servidor OPeNDAP NCCS respondendo normalmente. Recomendado consumo via ensemble NMME.",
   "error": null,
-  "extracted_at": "2026-11-14T15:35:16.883290+00:00",
+  "extracted_at": "2026-11-14T16:18:59.545861+00:00",
   "raw_sample": "OPeNDAP NCCS Status: 200\nDiretórios detectados: ['http://opendap.nccs.nasa.gov:80/dods/GEOS-5', 'http://opendap.nccs.nasa.gov:80/dods/gmao']",
   "parsed_data": {
     "portal_status": 200,

@@ -20,10 +20,10 @@
   "viz_type": "ibge_yields",
   "status": "ONLINE_OPEN",
   "http_status": 200,
-  "latency_ms": 145,
+  "latency_ms": 110,
   "audit_notes": "",
   "error": null,
-  "extracted_at": "2026-11-14T15:36:04.049137+00:00",
+  "extracted_at": "2026-11-14T16:19:35.691143+00:00",
   "raw_sample": "[\n  {\n    \"NC\": \"6\",\n    \"NN\": \"Município\",\n    \"MC\": \"33\",\n    \"MN\": \"Quilogramas por Hectare\",\n    \"V\": \"7222\",\n    \"D1C\": \"5218805\",\n    \"D1N\": \"Rio Verde (GO)\",\n    \"D2C\": \"112\",\n    \"D2N\": \"Rendimento médio da produção\",\n    \"D3C\": \"2021\",\n    \"D3N\": \"2021\",\n    \"D4C\": \"40122\",\n    \"D4N\": \"Milho (em grão)\"\n  },\n  {\n    \"NC\": \"6\",\n    \"NN\": \"Município\",\n    \"MC\": \"33\",\n    \"MN\": \"Quilogramas por Hectare\",\n    \"V\": \"3600\",\n    \"D1C\": \"5218805\",\n    \"D1N\": \"Rio Verde (GO)\",\n    \"D2C\": \"112\",\n    \"D2N\": \"Rendimento médio da produção\",\n    \"D3C\": \"2021\",\n    \"D3N\": \"2021\",\n    \"D4C\": \"40124\",\n    \"D4N\": \"Soja (em grão)\"\n  },\n  {\n    \"NC\": \"6\",\n    \"NN\": \"Município\",\n    \"MC\": \"33\",\n    \"MN\": \"Quilogramas por Hectare\",\n    \"V\": \"3900\",\n    \"D1C\": \"5218805\",\n    \"D1N\": \"Rio Verde (GO)\",\n    \"D2C\": \"112\",\n    \"D2N\": \"Rendimento médio da produção\",\n    \"D3C\": \"2021\",\n    \"D3N\": \"2021\",\n    \"D4C\": \"40125\",\n    \"D4N\": \"Sorgo (em grão)\"\n  },\n  {\n    \"NC\": \"6\",\n    \"NN\": \"Município\",\n    \"MC\": \"33\",\n    \"MN\": \"Quilogramas por Hectare\",\n    \"V\": \"5135\",\n    \"D1C\": \"5218805\",\n    \"D1N\": \"Rio Verde (GO)\",\n    \"D2C\": \"112\",\n    \"D2N\": \"Rendimento médio da produção\",\n    \"D3C\": \"2022\",\n    \"D3N\": \"2022\",\n    \"D4C\": \"40122\",\n    \"D4N\": \"Milho (em grão)\"\n  },\n  {\n    \"NC\": \"6\",\n    \"NN\": \"Município\",\n    \"MC\": \"33\",\n    \"MN\": \"Quilogramas por Hectare\",\n    \"V\": \"3900\",\n    \"D1C\": \"5218805\",\n    \"D1N\": \"Rio Verde (GO)\",\n    \"D2C\": \"112\",\n    \"D2N\": \"Rendimento médio da produção\",\n    \"D3C\": \"2022\",\n    \"D3N\": \"2022\",\n    \"D4C\": \"40124\",\n    \"D4N\": \"Soja (em grão)\"\n  }\n]",
   "parsed_data": {
     "records": [

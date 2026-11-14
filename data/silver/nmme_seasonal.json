@@ -20,10 +20,10 @@
   "viz_type": "nmme_terciles",
   "status": "ONLINE_OPEN",
   "http_status": 200,
-  "latency_ms": 13535,
+  "latency_ms": 13600,
   "audit_notes": "Arquivos sazonais mais recentes detectados: prate.202611.prob.seas.nc e tmp2m.202611.prob.seas.nc (5348 KB cada).",
   "error": null,
-  "extracted_at": "2026-11-14T15:35:03.328550+00:00",
+  "extracted_at": "2026-11-14T16:18:45.927397+00:00",
   "raw_sample": "NetCDF Variables: ['lon', 'lat', 'target', 'initial_time', 'prob_above', 'prob_norm', 'prob_below']\nArquivo Precipitação: prate.202611.prob.seas.nc\nArquivo Temperatura: tmp2m.202611.prob.seas.nc\nCélula extraída para Rio Verde/GO: {'season': 'OND 2026', 'grid_lat': -18.0, 'grid_lon': -51.0, 'prob_below': 52.2, 'prob_norm': 26.1, 'prob_above': 21.7}",
   "parsed_data": {
     "prate_file": "prate.202611.prob.seas.nc",

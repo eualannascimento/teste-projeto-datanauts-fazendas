@@ -20,10 +20,10 @@
   "viz_type": "cmr_granules",
   "status": "ONLINE_DISCOVERY_ONLY",
   "http_status": 200,
-  "latency_ms": 692,
+  "latency_ms": 598,
   "audit_notes": "Cenas recentes de 70m sobre Rio Verde/GO confirmadas no CMR. Pixel extraction via AppEEARS requer Earthdata Token.",
   "error": null,
-  "extracted_at": "2026-11-14T15:35:53.141345+00:00",
+  "extracted_at": "2026-11-14T16:19:25.090220+00:00",
   "raw_sample": "[\n  {\n    \"id\": \"ECOv002_L3T_JET_46942_017_22KEF_20261015T190255_0713_01\",\n    \"start\": \"2026-10-15T19:02:55.287Z\",\n    \"end\": \"2026-10-15T19:03:47.257Z\",\n    \"size_mb\": \"3.45\",\n    \"download_url\": \"https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/ECO_L3T_JET.002/ECOv002_L3T_JET_46942_017_22KEF_20261015T190255_0713_01/ECOv002_L3T_JET_46942_017_22KEF_20261015T190255_0713_01_STICinst.tif\"\n  },\n  {\n    \"id\": \"ECOv003_L3T_JET_46942_017_22KEF_20261015T190255_01\",\n    \"start\": \"2026-10-15T19:02:55.287Z\",\n    \"end\": \"2026-10-15T19:03:47.257Z\",\n    \"size_mb\": \"9.05\",\n    \"download_url\": \"https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/ECO_L3T_JET.003/ECOv003_L3T_JET_46942_017_22KEF_20261015T190255_01/ECOv003_L3T_JET_46942_017_22KEF_20261015T190255_01_PTJPLSMinst.tif\"\n  }\n]",
   "parsed_data": {
     "collection": "ECO_L3T_JET v002",

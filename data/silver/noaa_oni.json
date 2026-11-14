@@ -20,10 +20,10 @@
   "viz_type": "oni_timeline",
   "status": "ONLINE_OPEN",
   "http_status": 200,
-  "latency_ms": 853,
+  "latency_ms": 704,
   "audit_notes": "",
   "error": null,
-  "extracted_at": "2026-11-14T15:35:02.467222+00:00",
+  "extracted_at": "2026-11-14T16:18:45.218048+00:00",
   "raw_sample": "SEAS  YR   TOTAL   ANOM\nDJF 1950  25.01  -1.32\nJFM 1950  25.36  -1.20\nFMA 1950  25.88  -1.12\n...\nMAM 2026  28.09   0.46\nAMJ 2026  28.74   0.95\nMJJ 2026  29.02   1.39\nJJA 2026  29.09   1.80\nJAS 2026  29.12   2.16\nASO 2026  29.23   2.46",
   "parsed_data": {
     "latest": {

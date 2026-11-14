@@ -20,10 +20,10 @@
   "viz_type": "climateserv_rain",
   "status": "ONLINE_OPEN",
   "http_status": 200,
-  "latency_ms": 15930,
+  "latency_ms": 13950,
   "audit_notes": "IMERG V07 Late (dt=226) operacional até Out/2026 e CHIRPS (dt=0) até Set/2026. Camada NMME dentro do ClimateSERV marcada como layer-off/desatualizada em 2025-11-28.",
   "error": null,
-  "extracted_at": "2026-11-14T15:35:19.599743+00:00",
+  "extracted_at": "2026-11-14T16:19:02.499084+00:00",
   "raw_sample": "{\n  \"imerg_v07_sample\": [\n    {\n      \"date\": \"2026-10-26\",\n      \"avg_mm\": 1.23\n    },\n    {\n      \"date\": \"2026-10-27\",\n      \"avg_mm\": 2.72\n    },\n    {\n      \"date\": \"2026-10-28\",\n      \"avg_mm\": 14.23\n    },\n    {\n      \"date\": \"2026-10-29\",\n      \"avg_mm\": 5.2\n    },\n    {\n      \"date\": \"2026-10-30\",\n      \"avg_mm\": 4.53\n    }\n  ],\n  \"chirps_sample\": [\n    {\n      \"date\": \"2026-09-26\",\n      \"avg_mm\": 0.0\n    },\n    {\n      \"date\": \"2026-09-27\",\n      \"avg_mm\": 14.78\n    },\n    {\n      \"date\": \"2026-09-28\",\n      \"avg_mm\": 1.88\n    },\n    {\n      \"date\": \"2026-09-29\",\n      \"avg_mm\": 32.71\n    },\n    {\n      \"date\": \"2026-09-30\",\n      \"avg_mm\": 0.0\n    }\n  ]\n}",
   "parsed_data": {
     "imerg_oct2026_days": 30,

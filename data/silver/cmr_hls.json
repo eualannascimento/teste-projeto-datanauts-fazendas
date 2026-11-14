@@ -20,10 +20,10 @@
   "viz_type": "cmr_granules",
   "status": "ONLINE_DISCOVERY_ONLY",
   "http_status": 200,
-  "latency_ms": 974,
+  "latency_ms": 874,
   "audit_notes": "API STAC retornou 5 cenas recentes (Set–Nov/2026) sobre Rio Verde/GO.",
   "error": null,
-  "extracted_at": "2026-11-14T15:35:53.840735+00:00",
+  "extracted_at": "2026-11-14T16:19:25.692440+00:00",
   "raw_sample": "[\n  {\n    \"id\": \"HLS.S30.T22KEF.2026244T133831.v2.0\",\n    \"start\": \"2026-09-01T13:47:12.957Z\",\n    \"cloud_cover_pct\": 81,\n    \"download_url\": \"https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/HLSS30.020/HLS.S30.T22KEF.2026244T133831.v2.0/HLS.S30.T22KEF.2026244T133831.v2.0.B04.tif\"\n  },\n  {\n    \"id\": \"HLS.S30.T22KDF.2026244T133831.v2.0\",\n    \"start\": \"2026-09-01T13:47:16.561Z\",\n    \"cloud_cover_pct\": 64,\n    \"download_url\": \"https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/HLSS30.020/HLS.S30.T22KDF.2026244T133831.v2.0/HLS.S30.T22KDF.2026244T133831.v2.0.B04.tif\"\n  }\n]",
   "parsed_data": {
     "collection": "HLSS30_2.0",

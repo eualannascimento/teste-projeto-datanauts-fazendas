@@ -20,10 +20,10 @@
   "viz_type": "appeears_products",
   "status": "ONLINE_OPEN",
   "http_status": 200,
-  "latency_ms": 710,
+  "latency_ms": 685,
   "audit_notes": "Catálogo ativo com 193 produtos oficiais disponíveis via API REST.",
   "error": null,
-  "extracted_at": "2026-11-14T15:35:54.822146+00:00",
+  "extracted_at": "2026-11-14T16:19:26.573405+00:00",
   "raw_sample": "[\n  {\n    \"product_id\": \"MCD12Q2.061\",\n    \"description\": \"Land Cover Dynamics\",\n    \"resolution\": \"500m\",\n    \"temporal\": \"Yearly\",\n    \"platform\": \"Combined MODIS\"\n  },\n  {\n    \"product_id\": \"MOD13Q1.061\",\n    \"description\": \"Vegetation Indices (NDVI & EVI)\",\n    \"resolution\": \"250m\",\n    \"temporal\": \"16 day\",\n    \"platform\": \"Terra MODIS\"\n  },\n  {\n    \"product_id\": \"SPL4SMGP.008\",\n    \"description\": \"Surface and Root Zone Soil Moisture\",\n    \"resolution\": \"9000m\",\n    \"temporal\": \"Daily\",\n    \"platform\": \"SMAP\"\n  }\n]",
   "parsed_data": {
     "total_products": 193,

@@ -20,10 +20,10 @@
   "viz_type": "cmr_granules",
   "status": "ONLINE_DISCOVERY_ONLY",
   "http_status": 200,
-  "latency_ms": 687,
+  "latency_ms": 564,
   "audit_notes": "Grânulos ativos em 2026 confirmados sobre Rio Verde/GO. Em produção, extrair série via NASA AppEEARS API com Earthdata Bearer Token.",
   "error": null,
-  "extracted_at": "2026-11-14T15:35:50.862043+00:00",
+  "extracted_at": "2026-11-14T16:19:23.025095+00:00",
   "raw_sample": "[\n  {\n    \"id\": \"SMAP_L4_SM_gph_20261110T223000_Vv8013_001.h5_u9loH5HD\",\n    \"start\": \"2026-11-10T21:00:00.000Z\",\n    \"end\": \"2026-11-11T00:00:00.000Z\",\n    \"size_mb\": \"142.94359493255615\",\n    \"download_url\": \"https://data.nsidc.earthdatacloud.nasa.gov/nsidc-cumulus-prod-protected/SMAP/SPL4SMGP/008/2026/11/10/SMAP_L4_SM_gph_20261110T223000_Vv8013_001.h5\"\n  },\n  {\n    \"id\": \"SMAP_L4_SM_gph_20261110T193000_Vv8013_001.h5_u9loH5HD\",\n    \"start\": \"2026-11-10T18:00:00.000Z\",\n    \"end\": \"2026-11-10T21:00:00.000Z\",\n    \"size_mb\": \"143.29909610748285\",\n    \"download_url\": \"https://data.nsidc.earthdatacloud.nasa.gov/nsidc-cumulus-prod-protected/SMAP/SPL4SMGP/008/2026/11/10/SMAP_L4_SM_gph_20261110T193000_Vv8013_001.h5\"\n  }\n]",
   "parsed_data": {
     "collection": "SPL4SMGP v007/v008",

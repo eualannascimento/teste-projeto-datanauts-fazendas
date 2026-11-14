@@ -20,10 +20,10 @@
   "viz_type": "cmr_granules",
   "status": "ONLINE_DISCOVERY_ONLY",
   "http_status": 200,
-  "latency_ms": 708,
+  "latency_ms": 583,
   "audit_notes": "Busca de grânulos 100% aberta; download direto do HDF5 no GES DISC requer Earthdata Bearer Token.",
   "error": null,
-  "extracted_at": "2026-11-14T15:35:38.064225+00:00",
+  "extracted_at": "2026-11-14T16:19:18.988686+00:00",
   "raw_sample": "[\n  {\n    \"id\": \"GPM_3IMERGDF.07:3B-DAY.MS.MRG.3IMERG.20250930-S000000-E235959.V07B.nc4\",\n    \"start\": \"2025-09-30T00:00:00.000Z\",\n    \"end\": \"2025-09-30T23:59:59.999Z\",\n    \"size_mb\": \"30.9714450836182\",\n    \"download_url\": \"https://data.gesdisc.earthdata.nasa.gov/data/GPM_L3/GPM_3IMERGDF.07/2025/09/3B-DAY.MS.MRG.3IMERG.20250930-S000000-E235959.V07B.nc4\"\n  },\n  {\n    \"id\": \"GPM_3IMERGDF.07:3B-DAY.MS.MRG.3IMERG.20250929-S000000-E235959.V07B.nc4\",\n    \"start\": \"2025-09-29T00:00:00.000Z\",\n    \"end\": \"2025-09-29T23:59:59.999Z\",\n    \"size_mb\": \"30.6221685409546\",\n    \"download_url\": \"https://data.gesdisc.earthdata.nasa.gov/data/GPM_L3/GPM_3IMERGDF.07/2025/09/3B-DAY.MS.MRG.3IMERG.20250929-S000000-E235959.V07B.nc4\"\n  }\n]",
   "parsed_data": {
     "collection": "GPM_3IMERGDF v07",

@@ -13,6 +13,7 @@ Protótipo de engenharia de dados desenvolvido para o desafio **Field Shift: Ada
 1. **Início: Entenda o Sistema:** Guia visual em 5 etapas traduzindo o que cada API responde em linguagem simples, com classificação de natureza (**Dado Fatídico**, **Previsão/Forecasting**, **Simulação/Reanálise**, **Regra/Catálogo**) e **Período Mínimo / Máximo**.
 2. **Explorar Todas as 21 APIs (ETL):** Visualizações dedicadas para todas as 21 fontes (termômetro ENSO, tercís NMME, previsão 7 dias CPTEC, GDD NASA POWER, escala de pixel vs. fazenda nos catálogos CMR/STAC, perfil de solo SoilGrids + ZARC, histórico IBGE PAM, estrutura de custos CONAB, crédito SICOR/BCB e paridade CBOT/Dólar).
 3. **Simulador Econômico (Fazenda):** Comparativo visual Risco × Retorno e slider de área de `100` a `1.500 ha`.
+4. **Caso de Uso: Rotare com El Niño:** Backtest interativo nos anos análogos reais de El Niño forte (`1997/98`, `2015/16`, `2023/24` via NASA POWER + SoilGrids), simulação `-20%` chuva / `+1°C`, sensibilidade de plantio (`-1 sem / Base / +1 sem`), notas de solo e blocos transparentes (`Por quê`, `Benefícios`, `Riscos`, `O que não sabemos`).
 
 ## Arquitetura Medallion (ETL)
 1. **Bronze (`data/bronze/`):** Respostas brutas originais preservadas localmente para auditoria (ignoradas no Git para manter o repositório leve).

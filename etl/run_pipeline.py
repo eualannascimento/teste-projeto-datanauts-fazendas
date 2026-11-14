@@ -39,6 +39,7 @@ from etl.extractors.crop_phenology import (
     NasaHarvestCropMonitorExtractor,
     NasaHlsStacExtractor,
 )
+from etl.extractors.rotare_analogs import fetch_rotare_analogs
 from etl.extractors.soil_water import (
     NasaCmrGldasExtractor,
     NasaCmrSmapExtractor,
@@ -195,6 +196,10 @@ def main() -> None:
     records_by_id = {r["id"]: r for r in records}
     synthesis = build_decision_synthesis(records_by_id)
 
+    print("  -> [Rotare Backtest] NASA POWER Análogos El Niño (1997/98, 2015/16, 2023/24, 2022/23) ... ", end="", flush=True)
+    rotare_analogs = fetch_rotare_analogs()
+    print(f"OK ({len(rotare_analogs.get('seasons', []))} safras diárias)")
+
     GOLD_DIR.mkdir(parents=True, exist_ok=True)
     generated_at = datetime.now(timezone.utc).isoformat()
 
@@ -211,6 +216,7 @@ def main() -> None:
         "anchor_farm": ANCHOR_FARM,
         "summary": summary,
         "decision_synthesis": synthesis,
+        "rotare_analogs": rotare_analogs,
         "sources": records,
     }
 

@@ -20,10 +20,10 @@
   "viz_type": "soil_profile",
   "status": "ONLINE_OPEN",
   "http_status": 200,
-  "latency_ms": 11655,
+  "latency_ms": 2862,
   "audit_notes": "",
   "error": null,
-  "extracted_at": "2026-11-14T15:35:39.204197+00:00",
+  "extracted_at": "2026-11-14T16:19:20.157510+00:00",
   "raw_sample": "{\n  \"type\": \"Feature\",\n  \"geometry\": {\n    \"type\": \"Point\",\n    \"coordinates\": [\n      -51.02,\n      -17.84\n    ]\n  },\n  \"properties\": {\n    \"layers\": [\n      {\n        \"name\": \"clay\",\n        \"unit_measure\": {\n          \"d_factor\": 10,\n          \"mapped_units\": \"g/kg\",\n          \"target_units\": \"%\",\n          \"uncertainty_unit\": \"\"\n        },\n        \"depths\": [\n          {\n            \"range\": {\n              \"top_depth\": 0,\n              \"bottom_depth\": 5,\n              \"unit_depth\": \"cm\"\n            },\n            \"label\": \"0-5cm\",\n            \"values\": {\n              \"mean\": 340\n            }\n          },\n          {\n            \"range\": {\n              \"top_depth\": 15,\n              \"bottom_depth\": 30,\n              \"unit_depth\": \"cm\"\n            },\n            \"label\": \"15-30cm\",\n            \"values\": {\n              \"mean\": 385\n            }\n          }\n        ]\n      },\n      {\n        \"name\": \"sand\",\n        \"unit_measure\": {\n          \"d_factor\": 10,\n          \"mapped_units\": \"g/kg\",\n          \"target_units\": \"%\",\n          \"uncertainty_unit\": \"\"\n        },\n        \"depths\": [\n          {\n            \"range\": {\n              \"top_depth\": 0,\n              \"bottom_depth\": 5,\n              \"unit_depth\": \"cm\"\n            },\n            \"label\": \"0-5cm\",\n            \"values\": {\n              \"mean\": 470\n            }\n          },\n          {\n            \"range\": {\n              \"top_depth\": 15,\n              \"bottom_depth\": 30,\n              \"unit_depth\": \"cm\"\n            },\n            \"label\": \"15-30cm\",\n            \"values\": {\n              \"mean\": 445\n          ",
   "parsed_data": {
     "depths": {

@@ -20,10 +20,10 @@
   "viz_type": "weather_7d",
   "status": "ONLINE_OPEN",
   "http_status": 200,
-  "latency_ms": 130,
+  "latency_ms": 99,
   "audit_notes": "",
   "error": null,
-  "extracted_at": "2026-11-14T15:35:18.529058+00:00",
+  "extracted_at": "2026-11-14T16:19:01.188854+00:00",
   "raw_sample": "<?xml version='1.0' encoding='ISO-8859-1'?><cidade><nome>Rio Verde</nome><uf>GO</uf><atualizacao>2026-11-14</atualizacao><previsao><dia>2026-11-14</dia><tempo>pn</tempo><maxima>34</maxima><minima>21</minima><iuv>0.0</iuv></previsao><previsao><dia>2026-11-15</dia><tempo>c</tempo><maxima>34</maxima><minima>18</minima><iuv>0.0</iuv></previsao><previsao><dia>2026-11-16</dia><tempo>c</tempo><maxima>29</maxima><minima>21</minima><iuv>0.0</iuv></previsao><previsao><dia>2026-11-17</dia><tempo>c</tempo><maxima>28</maxima><minima>18</minima><iuv>0.0</iuv></previsao><previsao><dia>2026-11-18</dia><tempo>c</tempo><maxima>28</maxima><minima>17</minima><iuv>0.0</iuv></previsao><previsao><dia>2026-11-19</dia><tempo>c</tempo><maxima>29</maxima><minima>17</minima><iuv>0.0</iuv></previsao><previsao><dia>2026-11-20</dia><tempo>ci</tempo><maxima>29</maxima><minima>20</minima><iuv>0.0</iuv></previsao></cidade>",
   "parsed_data": {
     "city": "Rio Verde",
