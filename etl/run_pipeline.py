@@ -34,6 +34,7 @@ from etl.extractors.climate_macro import (
     NoaaOniExtractor,
 )
 from etl.extractors.crop_phenology import (
+    InpeBdcWtssExtractor,
     NasaAppEEARSCatalogExtractor,
     NasaCmrEcostressExtractor,
     NasaHarvestCropMonitorExtractor,
@@ -103,9 +104,15 @@ def build_decision_synthesis(records_by_id: Dict[str, Dict[str, Any]]) -> Dict[s
             "phase": oni_data.get("current_phase", "Indisponível"),
             "oni_anomaly": oni_data.get("latest", {}).get("anomaly"),
             "oni_season": oni_data.get("latest", {}).get("label"),
+            "alert_status": oni_data.get("alert_status"),
+            "discussion_date": oni_data.get("discussion_date"),
+            "forecast_prob_pct": oni_data.get("forecast_prob_pct"),
+            "forecast_synopsis": oni_data.get("forecast_synopsis"),
         },
         "nmme_safrinha_outlook": safrinha_fcst,
         "soil_auto_zarc": soil_data.get("zarc_soil_classification", "Indisponível"),
+        "soil_cad_85cm_mm": soil_data.get("cad_85cm_mm"),
+        "soil_chemistry": soil_data.get("chemistry"),
         "zarc_windows_summary": [
             {
                 "crop": z["crop"],
@@ -173,6 +180,7 @@ def main() -> None:
         NasaCmrGldasExtractor(),
         NasaGraceFoExtractor(),
         # 4. Fenologia & Talhão
+        InpeBdcWtssExtractor(),
         NasaCmrEcostressExtractor(),
         NasaHlsStacExtractor(),
         NasaAppEEARSCatalogExtractor(),

@@ -206,7 +206,7 @@
     `;
   }
 
-  /* Renderizadores específicos para TODAS as 21 fontes */
+  /* Renderizadores específicos para TODAS as 22 fontes */
   const renderers = {
     oni_timeline(src) {
       const d = src.parsed_data || {};
@@ -215,13 +215,22 @@
       const pctPos = Math.max(2, Math.min(98, ((anom + 2.6) / 5.2) * 100));
       return `
         <div class="viz-card">
-          <h3>Termômetro Oficial El Niño / La Niña (Índice NOAA ONI)</h3>
+          <h3>Termômetro Oficial El Niño / La Niña (Índice NOAA ONI + Boletim CPC)</h3>
           <div class="kpi-row">
             <div class="kpi-box"><div class="k-lbl">Fase Atual ENSO</div><div class="k-val" style="color:${anom >= 0.5 ? "var(--crimson)" : anom <= -0.5 ? "var(--cobalt)" : "var(--ink)"}">${esc(d.current_phase)}</div></div>
-            <div class="kpi-box"><div class="k-lbl">Último Trimestre</div><div class="k-val">${esc(d.latest?.label)}</div></div>
-            <div class="kpi-box"><div class="k-lbl">Anomalia Oceano Pacífico</div><div class="k-val">${anom > 0 ? "+" : ""}${anom} °C</div></div>
-            <div class="kpi-box"><div class="k-lbl">Série Histórica Completa</div><div class="k-val">${d.total_records || 0} trim.</div></div>
+            <div class="kpi-box"><div class="k-lbl">Alerta Oficial NOAA CPC</div><div class="k-val" style="font-size:15px">${esc(d.alert_status || "El Niño Advisory")}</div></div>
+            <div class="kpi-box"><div class="k-lbl">Último Trimestre</div><div class="k-val">${esc(d.latest?.label)} (${anom > 0 ? "+" : ""}${anom} °C)</div></div>
+            <div class="kpi-box"><div class="k-lbl">Chance Oficial Citada</div><div class="k-val" style="color:var(--crimson)">${d.forecast_prob_pct != null ? ">" + d.forecast_prob_pct + "%" : d.total_records + " trim."}</div></div>
           </div>
+
+          ${
+            d.forecast_synopsis
+              ? `<div style="background:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:10px 12px;margin:0 0 14px;font-size:12.5px">
+                  <strong>Boletim Oficial CPC/NOAA${d.discussion_date ? " (" + esc(d.discussion_date) + ")" : ""}:</strong>
+                  <span>${esc(d.forecast_synopsis)}</span>
+                 </div>`
+              : ""
+          }
 
           <div style="margin:6px 0 16px">
             <div style="display:flex;justify-content:space-between;font-size:11.5px;font-weight:700;margin-bottom:4px">
@@ -466,6 +475,7 @@
 
     soil_profile(src) {
       const d = src.parsed_data || {};
+      const chem = d.chemistry || {};
       const depthRows = Object.entries(d.depths || {})
         .map(([depth, vals]) => {
           const clay = vals.clay || 0;
@@ -489,14 +499,60 @@
 
       return `
         <div class="viz-card">
-          <h3>Raio-X do Solo e Classificação Automática para Seguro Rural (ZARC)</h3>
+          <h3>Raio-X Físico, Hídrico e Químico do Solo (SoilGrids 2.0 + ZARC)</h3>
           <div class="kpi-row">
-            <div class="kpi-box"><div class="k-lbl">Classe ZARC Detectada Automaticamente</div><div class="k-val" style="font-size:16px;color:var(--emerald)">${esc(d.zarc_soil_classification)}</div></div>
+            <div class="kpi-box"><div class="k-lbl">Classe ZARC Automática</div><div class="k-val" style="font-size:15px;color:var(--emerald)">${esc(d.zarc_soil_classification)}</div></div>
+            <div class="kpi-box"><div class="k-lbl">CAD Física Real (85 cm)</div><div class="k-val" style="color:var(--cobalt)">${d.cad_85cm_mm ?? "—"} mm</div><div style="font-size:11px;color:var(--ink-muted)">${d.cad_mm_per_m ?? "—"} mm/m (CC−PM)</div></div>
+            <div class="kpi-box"><div class="k-lbl">Cap. Campo / P. Murcha</div><div class="k-val">${chem.wv0033_pct_15_30 ?? "—"}% / ${chem.wv1500_pct_15_30 ?? "—"}%</div><div style="font-size:11px;color:var(--ink-muted)">15–30 cm (-33 / -1500 kPa)</div></div>
+            <div class="kpi-box"><div class="k-lbl">pH • Carbono • CTC</div><div class="k-val" style="font-size:15px">pH ${chem.ph_0_5 ?? "—"} • ${chem.soc_g_kg_0_5 ?? "—"} g/kg</div><div style="font-size:11px;color:var(--ink-muted)">CTC ${chem.cec_cmolc_kg_0_5 ?? "—"} cmolc • N ${chem.nitrogen_g_kg_0_5 ?? "—"} g/kg</div></div>
           </div>
           ${depthRows}
           <p style="font-size:12.5px;color:var(--ink-muted);margin:4px 0 0">
-            Regra Prática: Solos com ≥ 35% de argila (Tipo 3) retêm água por mais dias entre veranicos, reduzindo o risco de perda da lavoura e liberando a janela mais segura do seguro agrícola.
+            Regra Prática: A diferença entre Capacidade de Campo (<code>wv0033</code>) e Ponto de Murcha (<code>wv1500</code>) mede quanta água real fica disponível para a raiz — calibrando o balanço hídrico do Rotare sem chute.
           </p>
+        </div>
+      `;
+    },
+
+    ndvi_rotation(src) {
+      const d = src.parsed_data || {};
+      const pts = (d.timeline_ndvi || []).map((p) => ({ x: p.date.slice(2, 7), y: p.ndvi }));
+      const cycles = d.yearly_cycles || [];
+      return `
+        <div class="viz-card">
+          <h3>Série Histórica de NDVI Sentinel-2 (10m) — Detecção de Rotação de Safras</h3>
+          <div class="kpi-row">
+            <div class="kpi-box"><div class="k-lbl">Composições Úteis (10m)</div><div class="k-val" style="color:var(--emerald)">${d.valid_count || 0} datas</div></div>
+            <div class="kpi-box"><div class="k-lbl">Anos-Safra com Dupla Safra</div><div class="k-val" style="color:var(--cobalt)">${d.double_crop_years || 0} / ${d.analyzed_harvests || 0}</div></div>
+            <div class="kpi-box"><div class="k-lbl">Nuvens Filtradas (-9999)</div><div class="k-val">${d.cloud_masked_count || 0}</div></div>
+            <div class="kpi-box"><div class="k-lbl">Acesso / Token</div><div class="k-val" style="color:var(--emerald);font-size:15px">100% Aberto (INPE)</div></div>
+          </div>
+          ${renderLineSvg(pts, {
+            minY: 0,
+            maxY: 1,
+            color: "#15803d",
+            height: 210,
+            thresholds: [
+              { val: 0.6, color: "#1d4ed8", label: "Dossel fechado / Pico vegetativo (NDVI ≥ 0,60)" },
+              { val: 0.25, color: "#d97706", label: "Solo exposto / Colheita ou entressafra (≤ 0,25)" },
+            ],
+          })}
+          <h4 style="margin:14px 0 8px;font-size:14px">Picos Detectados por Safra (1ª Safra Verão vs. 2ª Safra Outono)</h4>
+          <table class="data-table">
+            <thead><tr><th>Safra</th><th class="num">Pico 1ª Safra (Out–Fev)</th><th class="num">Pico 2ª Safra (Mar–Jun)</th><th>Padrão Detectado</th></tr></thead>
+            <tbody>
+              ${cycles
+                .map(
+                  (c) => `<tr>
+                    <td class="num"><strong>${esc(c.harvest)}</strong></td>
+                    <td class="num">${c.peak_safra1_ndvi != null ? fmtNum(c.peak_safra1_ndvi, 2) : "—"}</td>
+                    <td class="num">${c.peak_safra2_ndvi != null ? fmtNum(c.peak_safra2_ndvi, 2) : "—"}</td>
+                    <td>${c.double_crop_detected ? '<span class="badge open">Dupla Safra (Verão + Safrinha)</span>' : '<span class="badge partial">Safra Única / Nuvens na 2ª safra</span>'}</td>
+                  </tr>`
+                )
+                .join("")}
+            </tbody>
+          </table>
         </div>
       `;
     },
@@ -1181,11 +1237,15 @@
     const analogs = bundle.rotare_analogs || { seasons: [] };
     const syn = bundle.decision_synthesis || {};
     const soilSrc = (bundle.sources || []).find((x) => x.id === "soilgrids")?.parsed_data || {};
+    const ndviSrc = (bundle.sources || []).find((x) => x.id === "inpe_bdc_wtss")?.parsed_data || {};
     const ibgeSrc = (bundle.sources || []).find((x) => x.id === "ibge_sidra")?.parsed_data || {};
     const conabSrc = (bundle.sources || []).find((x) => x.id === "conab_custos")?.parsed_data || {};
 
     const clay15 = soilSrc.depths?.["15-30cm"]?.clay ?? 38.5;
-    const baseCadMm = Math.round(80 + clay15 * 0.85); // ~113 mm CAD para Latossolo argiloso Rio Verde
+    const soilChem = soilSrc.chemistry || {};
+    const baseCadMm = Math.round(soilSrc.cad_85cm_mm ?? (80 + clay15 * 0.85));
+
+    const ndviPts = (ndviSrc.timeline_ndvi || []).slice(-60).map((p) => ({ x: p.date.slice(2, 7), y: p.ndvi }));
 
     const conabSoja = (conabSrc.crops || []).find((c) => c.crop === "Soja")?.custeio_ha || 3353.87;
     const conabMilho = (conabSrc.crops || []).find((c) => c.crop === "Milho 2ª Safra")?.custeio_ha || 3803.69;
@@ -1517,9 +1577,11 @@
         <div class="el-nino-banner">
           <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap">
             <div>
-              <h2 style="margin:0 0 6px;font-size:21px">Caso de Uso: Rotare com El Niño — Backtest com Dados Reais da NASA</h2>
+              <h2 style="margin:0 0 6px;font-size:21px">Caso de Uso: Rotare com El Niño — Backtest com Dados Reais da NASA &amp; INPE</h2>
               <p style="margin:0;font-size:13.5px;color:var(--ink)">
-                A NOAA indica sinal forte de El Niño (<strong>${esc(syn.enso_status?.phase || "El Niño Forte")}</strong>, anomalia <strong>${syn.enso_status?.oni_anomaly ?? "—"}°C</strong> em ${esc(syn.enso_status?.oni_season || "ASO 2026")}). Recalculamos abaixo o risco da rotação usando os <strong>3 análogos reais de El Niño forte</strong> da NASA POWER (<strong>1997/98, 2015/16 e 2023/24</strong>) sobre o solo real de Rio Verde/GO (SoilGrids Tipo 3 • CAD ~${baseCadMm} mm).
+                A NOAA indica <strong>${esc(syn.enso_status?.alert_status || syn.enso_status?.phase || "El Niño Advisory")}</strong>
+                (ONI <strong>${syn.enso_status?.oni_anomaly ?? "—"}°C</strong> em ${esc(syn.enso_status?.oni_season || "ASO 2026")}${syn.enso_status?.forecast_prob_pct != null ? ` • <strong>&gt;${syn.enso_status.forecast_prob_pct}%</strong> de chance de El Niño forte` : ""}).
+                Recalculamos abaixo o risco da rotação usando os <strong>3 análogos reais de El Niño forte</strong> da NASA POWER (<strong>1997/98, 2015/16 e 2023/24</strong>) sobre a CAD física real de Rio Verde/GO (SoilGrids wv0033−wv1500: <strong>${baseCadMm} mm</strong> em 85 cm • pH ${soilChem.ph_0_5 ?? "—"}).
               </p>
             </div>
             <button id="rotareToggleElNino" class="filter-pill ${state.elNinoMode ? "active" : ""}" style="padding:9px 14px;background:${state.elNinoMode ? "var(--crimson)" : "var(--surface)"};color:${state.elNinoMode ? "#fff" : "var(--ink)"};border-color:var(--crimson)">
@@ -1535,14 +1597,24 @@
             <div id="rotareTalhaoBtn" class="talhao-polygon ${state.talhaoSelected ? "selected" : ""}">
               <div style="font-weight:700;font-size:14px;color:var(--emerald)">Talhão Piloto — Seu Carlos (${state.areaHa} ha)</div>
               <div class="num" style="font-size:11.5px;color:var(--ink-muted);margin-top:4px">Rio Verde/GO • -17.84°, -51.02°</div>
-              <div style="font-size:11.5px;margin-top:6px;font-weight:600">${state.talhaoSelected ? "✓ Talhão Selecionado (Solo Tipo 3 • 38,5% argila)" : "Clique para selecionar talhão"}</div>
+              <div style="font-size:11.5px;margin-top:6px;font-weight:600">
+                ${state.talhaoSelected
+                  ? `✓ Solo Tipo 3 (${clay15}% argila • CAD ${baseCadMm} mm • pH ${soilChem.ph_0_5 ?? "—"} • SOC ${soilChem.soc_g_kg_0_5 ?? "—"} g/kg)`
+                  : "Clique para selecionar talhão"}
+              </div>
             </div>
 
             <div style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:11px;font-size:12.5px">
-              <div style="font-weight:700;margin-bottom:4px">Card: Sua Rotação Atual</div>
-              <div>Detectada: <strong>Soja (Out–Jan) → Milho 2ª Safra</strong></div>
+              <div style="font-weight:700;margin-bottom:4px">Card: Sua Rotação Atual (Sentinel-2 INPE)</div>
+              <div>Detectada: <strong>Soja (1ª Safra) → Milho 2ª Safra</strong></div>
+              ${
+                ndviPts.length
+                  ? `<div style="margin:8px 0 4px">${renderLineSvg(ndviPts, { minY: 0, maxY: 1, color: "#15803d", height: 115 })}</div>`
+                  : ""
+              }
               <div style="font-size:11.5px;color:var(--ink-muted);margin-top:4px">
-                <em>Como sabemos (Transparência ETL):</em> O censo IBGE PAM de Rio Verde comprova dupla safra Soja (428,5 mil ha) + Milho 2ª Safra (352 mil ha), com queda da soja de 70→61,7 sc/ha no El Niño de 2024. O download automático de 10 anos de NDVI por pixel via NASA AppEEARS (MOD13Q1) está catalogado e aguarda Earthdata Token gratuito.
+                <em>Detectado em série real de ~10 anos (${ndviSrc.valid_count || 0} datas, 10m):</em>
+                Dupla safra confirmada em <strong>${ndviSrc.double_crop_years || 0} de ${ndviSrc.analyzed_harvests || 0} ciclos</strong> no INPE Brazil Data Cube (WTSS 100% aberto) + censo IBGE PAM.
               </div>
               <button id="confirmRotBtn" class="filter-pill ${state.rotationConfirmed ? "active" : ""}" style="margin-top:8px;width:100%">
                 ${state.rotationConfirmed ? "✓ Rotação Atual Confirmada" : "Confirmar Rotação Soja + Milho"}

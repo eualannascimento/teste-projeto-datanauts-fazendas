@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import html
 import re
 import xml.etree.ElementTree as ET
 from typing import Any, Dict, List
@@ -81,16 +82,47 @@ class NoaaOniExtractor(BaseExtractor):
         else:
             phase = "Neutro"
 
+        # Complementa com o boletim oficial mensal ENSO Diagnostic Discussion (100% aberto)
+        advisory_url = "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_advisory/ensodisc.shtml"
+        alert_status = ""
+        discussion_date = ""
+        synopsis = ""
+        forecast_prob_pct = None
+        try:
+            adv_resp, _ = self.timed_request(advisory_url, timeout=15)
+            if adv_resp.ok:
+                self.save_bronze("noaa_ensodisc.html", adv_resp.text)
+                clean_txt = html.unescape(re.sub(r"<[^>]+>", " ", adv_resp.text))
+                clean_txt = re.sub(r"\s+", " ", clean_txt)
+                m_status = re.search(r"ENSO Alert System Status:\s*(.+?)(?=\s*Synopsis:|\s*The recent)", clean_txt, re.I)
+                m_date = re.search(r"issued by.*?\s+(\d{1,2}\s+[A-Za-z]+\s+\d{4})", clean_txt, re.I)
+                m_syn = re.search(r"Synopsis:\s*(.+?\.)(?=\s|$)", clean_txt, re.I)
+                if m_status:
+                    alert_status = m_status.group(1).strip(" .")
+                if m_date:
+                    discussion_date = m_date.group(1).strip()
+                if m_syn:
+                    synopsis = m_syn.group(1).strip()
+                    m_pct = re.search(r"(\d{2,3})%\s*chance", synopsis, re.I)
+                    if m_pct:
+                        forecast_prob_pct = int(m_pct.group(1))
+        except Exception:
+            pass
+
+        adv_note = f" Boletim CPC ({discussion_date or 'atual'}): {alert_status}." if alert_status else ""
+        if forecast_prob_pct is not None:
+            adv_note += f" Probabilidade oficial citada: >{forecast_prob_pct}%."
+
         return {
             "status": "ONLINE_OPEN" if resp.ok else "ERROR",
             "http_status": resp.status_code,
             "latency_ms": latency,
-            "actual_format": "text/plain (ASCII colunar)",
+            "actual_format": "text/plain (ONI ASCII) + text/html (Boletim CPC)",
             "period_min": records[0]["label"] if records else self.period_min,
             "period_max": latest.get("label", self.period_max),
             "plain_answer": (
                 f"Estamos em fase '{phase}' com anomalia de {anom_val:+.2f}°C no Pacífico ({latest.get('label', '')}), "
-                f"sinalizando alerta máximo de atraso ou irregularidade de chuvas no Centro-Oeste."
+                f"sinalizando alerta máximo de atraso ou irregularidade de chuvas no Centro-Oeste.{adv_note}"
             ),
             "raw_sample": "\n".join(lines[:4] + ["..."] + lines[-6:]),
             "parsed_data": {
@@ -98,6 +130,11 @@ class NoaaOniExtractor(BaseExtractor):
                 "current_phase": phase,
                 "total_records": len(records),
                 "series_36m": recent,
+                "alert_status": alert_status or f"{phase} Monitoring",
+                "discussion_date": discussion_date,
+                "forecast_synopsis": synopsis,
+                "forecast_prob_pct": forecast_prob_pct,
+                "advisory_url": advisory_url,
             },
         }
 

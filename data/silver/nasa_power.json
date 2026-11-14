@@ -20,10 +20,10 @@
   "viz_type": "power_gdd",
   "status": "ONLINE_OPEN",
   "http_status": 200,
-  "latency_ms": 1199,
+  "latency_ms": 749,
   "audit_notes": "",
   "error": null,
-  "extracted_at": "2026-11-14T16:19:01.290817+00:00",
+  "extracted_at": "2026-11-14T18:43:50.600177+00:00",
   "raw_sample": "{\n  \"header\": {\n    \"title\": \"NASA/POWER Source Native Resolution Daily Data\",\n    \"api\": {\n      \"version\": \"v2.10.3\",\n      \"name\": \"POWER Daily API\"\n    },\n    \"sources\": [\n      \"MERRA2\",\n      \"GEOSIT\",\n      \"SYN1DEG\",\n      \"FLASHFLUX\",\n      \"POWER\"\n    ],\n    \"fill_value\": -999.0,\n    \"time_standard\": \"LST\",\n    \"start\": \"20251001\",\n    \"end\": \"20261031\"\n  },\n  \"sample_days\": [\n    {\n      \"date\": \"2026-10-27\",\n      \"t2m\": 27.5,\n      \"tmax\": 36.5,\n      \"tmin\": 18.8,\n      \"rain_mm\": 0.1,\n      \"rad_mj\": 19.1,\n      \"rh_pct\": 41.5,\n      \"gdd_day\": 17.7\n    },\n    {\n      \"date\": \"2026-10-28\",\n      \"t2m\": 27.4,\n      \"tmax\": 35.9,\n      \"tmin\": 21.4,\n      \"rain_mm\": 6.5,\n      \"rad_mj\": 7.7,\n      \"rh_pct\": 49.9,\n      \"gdd_day\": 18.6\n    },\n    {\n      \"date\": \"2026-10-29\",\n      \"t2m\": 24.0,\n      \"tmax\": 28.5,\n      \"tmin\": 20.5,\n      \"rain_mm\": 3.4,\n      \"rad_mj\": 14.0,\n      \"rh_pct\": 72.3,\n      \"gdd_day\": 14.5\n    },\n    {\n      \"date\": \"2026-10-30\",\n      \"t2m\": 25.7,\n      \"tmax\": 31.6,\n      \"tmin\": 20.3,\n      \"rain_mm\": 4.3,\n      \"rad_mj\": 23.6,\n      \"rh_pct\": 67.7,\n      \"gdd_day\": 15.9\n    },\n    {\n      \"date\": \"2026-10-31\",\n      \"t2m\": 26.1,\n      \"tmax\": 32.4,\n      \"tmin\": 21.9,\n      \"rain_mm\": 8.2,\n      \"rad_mj\": 3.3,\n      \"rh_pct\": 69.7,\n      \"gdd_day\": 17.1\n    }\n  ]\n}",
   "parsed_data": {
     "total_valid_days": 396,

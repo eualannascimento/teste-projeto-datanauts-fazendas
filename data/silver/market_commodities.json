@@ -20,10 +20,10 @@
   "viz_type": "market_prices",
   "status": "ONLINE_OPEN",
   "http_status": 200,
-  "latency_ms": 642,
+  "latency_ms": 604,
   "audit_notes": "CBOT (ZS=F, ZC=F) e Dólar Oficial Banco Central PTAX (R$ 5.65) operacionais (200 OK). CEPEA/ESALQ respondeu HTTP 200 com headers de navegador (HTML tabular).",
   "error": null,
-  "extracted_at": "2026-11-14T16:19:45.488569+00:00",
+  "extracted_at": "2026-11-14T18:45:48.975838+00:00",
   "raw_sample": "{\n  \"ZS=F_last\": {\n    \"date\": \"2026-11-13\",\n    \"close\": 1243.0\n  },\n  \"ZC=F_last\": {\n    \"date\": \"2026-11-13\",\n    \"close\": 445.5\n  },\n  \"BCB_PTAX_USD_BRL\": 5.6518,\n  \"cepea_probe_http\": 200\n}",
   "parsed_data": {
     "usd_brl": 5.65,

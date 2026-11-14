@@ -20,15 +20,15 @@
   "viz_type": "zarc_calendar",
   "status": "ONLINE_OPEN",
   "http_status": 200,
-  "latency_ms": 436,
-  "audit_notes": "Streaming de 1,130,141 linhas em memória; extraídas 251 regras específicas para Rio Verde/GO (Safra 2026/2027).",
+  "latency_ms": 390,
+  "audit_notes": "Streaming de 1,130,098 linhas em memória; extraídas 251 regras específicas para Rio Verde/GO (Safra 2026/2027).",
   "error": null,
-  "extracted_at": "2026-11-14T16:19:29.083645+00:00",
+  "extracted_at": "2026-11-14T18:45:38.503473+00:00",
   "raw_sample": "[\n  {\n    \"Nome_cultura\": \"Cevada Grãos\",\n    \"SafraIni\": \"2026\",\n    \"SafraFin\": \"2027\",\n    \"Cod_Cultura\": \"12012320000031\",\n    \"Cod_Ciclo\": \"21\",\n    \"Cod_Solo\": \"13\",\n    \"geocodigo\": \"5218805\",\n    \"UF\": \"GO\",\n    \"municipio\": \"Rio Verde\",\n    \"Cod_Clima\": \"0\",\n    \"Nome_Clima\": \"Não se aplica\",\n    \"Cod_Outros_Manejos\": \"2\",\n    \"Nome_Outros_Manejos\": \"Irrigado\",\n    \"Produtividade\": \"\",\n    \"Cod_NM\": \"\",\n    \"Cod_Munic\": \"029579\",\n    \"Cod_Meso\": \"05\",\n    \"Cod_Micro\": \"013\",\n    \"Portaria\": \"Port.397_de_11-11-2026\",\n    \"dec1\": \"0\",\n    \"dec2\": \"0\",\n    \"dec3\": \"0\",\n    \"dec4\": \"0\",\n    \"dec5\": \"0\",\n    \"dec6\": \"0\",\n    \"dec7\": \"0\",\n    \"dec8\": \"0\",\n    \"dec9\": \"0\",\n    \"dec10\": \"0\",\n    \"dec11\": \"20\",\n    \"dec12\": \"20\",\n    \"dec13\": \"20\",\n    \"dec14\": \"20\",\n    \"dec15\": \"20\",\n    \"dec16\": \"20\",\n    \"dec17\": \"0\",\n    \"dec18\": \"0\",\n    \"dec19\": \"0\",\n    \"dec20\": \"0\",\n    \"dec21\": \"0\",\n    \"dec22\": \"0\",\n    \"dec23\": \"0\",\n    \"dec24\": \"0\",\n    \"dec25\": \"0\",\n    \"dec26\": \"0\",\n    \"dec27\": \"0\",\n    \"dec28\": \"0\",\n    \"dec29\": \"0\",\n    \"dec30\": \"0\",\n    \"dec31\": \"0\",\n    \"dec32\": \"0\",\n    \"dec33\": \"0\",\n    \"dec34\": \"0\",\n    \"dec35\": \"0\",\n    \"dec36\": \"0\"\n  },\n  {\n    \"Nome_cultura\": \"Cevada Grãos\",\n    \"SafraIni\": \"2026\",\n    \"SafraFin\": \"2027\",\n    \"Cod_Cultura\": \"12012320000031\",\n    \"Cod_Ciclo\": \"20\",\n    \"Cod_Solo\": \"13\",\n    \"geocodigo\": \"5218805\",\n    \"UF\": \"GO\",\n    \"municipio\": \"Rio Verde\",\n    \"Cod_Clima\": \"0\",\n    \"Nome_Clima\": \"Não se aplica\",\n    \"Cod_Outros_Manejos\": \"2\",\n    \"Nome_Outros_Manejos\": \"Irrigado\",\n    \"Produtividade\": \"\",\n    \"Cod_NM\": \"\",\n    \"Cod_Munic\": \"029579\",\n    \"Cod_Meso\": \"05\",\n    \"Cod_Micro\": \"013\",\n    \"Portaria\": \"Port.397_de_11-11-2026\",\n    \"dec1\": \"0\",\n    \"dec2\": \"0\",\n    \"dec3\": \"0\",\n    \"dec4\": \"0\",\n    \"dec5\": \"0\",\n    \"dec6\": \"0\",\n    \"dec7\": \"0\",\n    \"dec8\": \"0\",\n    \"dec9\": \"0\",\n    \"dec10\": \"0\",\n    \"dec11\": \"20\",\n    \"dec12\": \"20\",\n    \"dec13\": \"20\",\n    \"dec14\": \"20\",\n    \"dec15\": \"20\",\n    \"dec16\": \"20\",\n    \"dec17\": \"0\",\n    \"dec18\": \"0\",\n    \"dec19\": \"0\",\n    \"dec20\": \"0\",\n    \"dec21\": \"0\",\n    \"dec22\": \"0\",\n    \"dec23\": \"0\",\n    \"dec24\": \"0\",\n    \"dec25\": \"0\",\n    \"dec26\": \"0\",\n    \"dec27\": \"0\",\n    \"dec28\": \"0\",\n    \"dec29\": \"0\",\n    \"dec30\": \"0\",\n    \"dec31\": \"0\",\n    \"dec32\": \"0\",\n    \"dec33\": \"0\",\n    \"dec34\": \"0\",\n    \"dec35\": \"0\",\n    \"dec36\": \"0\"\n  }\n]",
   "parsed_data": {
     "safra": "2026/2027",
     "csv_url": "https://dados.agricultura.gov.br/dataset/6d3d141c-885e-41a4-ab7f-dc8ff323b96f/resource/139e5a60-1f43-4cc8-aeab-a35dbbf816c0/download/dados-abertos-tabua-de-risco-safra-2026-2027.csv",
-    "total_national_rows": 1130141,
+    "total_national_rows": 1130098,
     "rio_verde_rows": 251,
     "crops": [
       {

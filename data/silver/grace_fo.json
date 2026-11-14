@@ -20,10 +20,10 @@
   "viz_type": "audit_summary",
   "status": "ONLINE_OPEN",
   "http_status": 200,
-  "latency_ms": 923,
+  "latency_ms": 862,
   "audit_notes": "Portal operacional. Para ingestão automatizada, recomenda-se consumir o GeoTIFF semanal de Root Zone/Groundwater.",
   "error": null,
-  "extracted_at": "2026-11-14T16:19:24.160923+00:00",
+  "extracted_at": "2026-11-14T18:45:22.947645+00:00",
   "raw_sample": "Title: Home | NASA Grace\nLinks: ['/ConusData.aspx', '/GlobalData.aspx', 'https://drought.unl.edu']",
   "parsed_data": {
     "portal_title": "Home | NASA Grace",

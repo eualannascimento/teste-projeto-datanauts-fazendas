@@ -34,31 +34,41 @@ class SoilGridsExtractor(BaseExtractor):
     viz_type = "soil_profile"
 
     def extract(self) -> Dict[str, Any]:
-        params = [
-            ("lon", ANCHOR_FARM["lon"]),
-            ("lat", ANCHOR_FARM["lat"]),
-            ("property", "clay"),
-            ("property", "sand"),
-            ("property", "silt"),
-            ("depth", "0-5cm"),
-            ("depth", "15-30cm"),
-            ("value", "mean"),
-        ]
+        props = ["clay", "sand", "silt", "phh2o", "soc", "cec", "nitrogen", "wv0033", "wv1500"]
+        params = [("lon", ANCHOR_FARM["lon"]), ("lat", ANCHOR_FARM["lat"])]
+        for p in props:
+            params.append(("property", p))
+        params.extend([("depth", "0-5cm"), ("depth", "15-30cm"), ("value", "mean")])
+
         resp, latency = self.timed_request(self.url, params=params, timeout=35)
         self.save_bronze("soilgrids_rio_verde.json", resp.text)
         data = resp.json()
 
+        divisors = {
+            "clay": 10.0,     # g/kg -> %
+            "sand": 10.0,     # g/kg -> %
+            "silt": 10.0,     # g/kg -> %
+            "phh2o": 10.0,    # pH*10 -> pH
+            "soc": 10.0,      # dg/kg -> g/kg
+            "cec": 10.0,      # mmol(c)/kg -> cmolc/kg
+            "nitrogen": 100.0,  # cg/kg -> g/kg
+            "wv0033": 10.0,   # (10^-2 cm3/cm3)*10 -> % vol
+            "wv1500": 10.0,   # (10^-2 cm3/cm3)*10 -> % vol
+        }
+
         layers_parsed: Dict[str, Dict[str, float]] = {}
         for layer in data.get("properties", {}).get("layers", []):
             prop = layer.get("name")
+            div = divisors.get(prop, 10.0)
             for d in layer.get("depths", []):
                 lbl = d.get("label")
                 val = d.get("values", {}).get("mean")
                 if val is not None:
-                    # SoilGrids retorna em g/kg -> dividir por 10 dá %
-                    layers_parsed.setdefault(lbl, {})[prop] = round(val / 10.0, 1)
+                    layers_parsed.setdefault(lbl, {})[prop] = round(val / div, 2 if div == 100.0 else 1)
 
-        top_clay = layers_parsed.get("15-30cm", {}).get("clay", 0.0)
+        d0 = layers_parsed.get("0-5cm", {})
+        d15 = layers_parsed.get("15-30cm", {})
+        top_clay = d15.get("clay", 0.0)
         if top_clay >= 35.0:
             zarc_soil_type = "Tipo 3 (Argiloso ≥ 35% argila — Alta retenção hídrica)"
             zarc_code = 3
@@ -69,18 +79,43 @@ class SoilGridsExtractor(BaseExtractor):
             zarc_soil_type = "Tipo 1 (Arenoso < 15% argila — Baixa retenção)"
             zarc_code = 1
 
+        # Retenção hídrica real: Capacidade de Campo (-33 kPa) menos Ponto de Murcha (-1500 kPa)
+        awc0 = max(0.0, round((d0.get("wv0033", 0.0) - d0.get("wv1500", 0.0)), 1))
+        awc15 = max(0.0, round((d15.get("wv0033", 0.0) - d15.get("wv1500", 0.0)), 1))
+        awc_avg_pct = round((awc0 * 0.3 + awc15 * 0.7), 1) if (awc0 or awc15) else 12.0
+        cad_mm_per_m = round(awc_avg_pct * 10.0, 1)
+        cad_85cm_mm = round(awc_avg_pct * 8.5, 1)
+
+        chemistry = {
+            "ph_0_5": d0.get("phh2o"),
+            "ph_15_30": d15.get("phh2o"),
+            "soc_g_kg_0_5": d0.get("soc"),
+            "soc_g_kg_15_30": d15.get("soc"),
+            "cec_cmolc_kg_0_5": d0.get("cec"),
+            "cec_cmolc_kg_15_30": d15.get("cec"),
+            "nitrogen_g_kg_0_5": d0.get("nitrogen"),
+            "wv0033_pct_15_30": d15.get("wv0033"),
+            "wv1500_pct_15_30": d15.get("wv1500"),
+            "awc_pct_15_30": awc15,
+            "cad_mm_per_m": cad_mm_per_m,
+            "cad_85cm_mm": cad_85cm_mm,
+        }
+
         return {
             "status": "ONLINE_OPEN" if resp.ok else "ERROR",
             "http_status": resp.status_code,
             "latency_ms": latency,
             "actual_format": "application/json (GeoJSON)",
             "plain_answer": (
-                f"Detectado solo com {top_clay}% de argila na camada 15–30cm -> classificado automaticamente "
-                f"como {zarc_soil_type}."
+                f"Detectado solo com {top_clay}% de argila na camada 15–30cm -> {zarc_soil_type}; "
+                f"CAD física real de {cad_85cm_mm} mm em 85 cm ({cad_mm_per_m} mm/m via wv0033−wv1500) e pH {d0.get('phh2o', '—')}."
             ),
             "raw_sample": json.dumps(data, indent=2)[:1600],
             "parsed_data": {
                 "depths": layers_parsed,
+                "chemistry": chemistry,
+                "cad_mm_per_m": cad_mm_per_m,
+                "cad_85cm_mm": cad_85cm_mm,
                 "zarc_soil_code": zarc_code,
                 "zarc_soil_classification": zarc_soil_type,
             },

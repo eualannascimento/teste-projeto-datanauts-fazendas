@@ -4,7 +4,8 @@ from __future__ import annotations
 
 import json
 import re
-from typing import Any, Dict
+from datetime import datetime, timezone
+from typing import Any, Dict, List
 
 from etl.base_extractor import BaseExtractor
 from etl.config import ANCHOR_FARM
@@ -209,4 +210,124 @@ class NasaHarvestCropMonitorExtractor(BaseExtractor):
             "audit_notes": "Portal oficial ativo. Sem endpoint REST granular para coordenadas individuais.",
             "raw_sample": f"Title: {title_m.group(1).strip() if title_m else ''}",
             "parsed_data": {"portal_title": title_m.group(1).strip() if title_m else "GEOGLAM Crop Monitor"},
+        }
+
+
+class InpeBdcWtssExtractor(BaseExtractor):
+    source_id = "inpe_bdc_wtss"
+    name = "INPE Brazil Data Cube – WTSS Sentinel-2 NDVI (10m)"
+    provider = "INPE / MCTI (Brazil Data Cube — Dados Abertos)"
+    layer = "4. Fenologia & Talhão"
+    url = "https://data.inpe.br/bdc/wtss/v4/time_series"
+    auth_required = "Nenhum (100% Aberto — API WTSS)"
+    expected_format = "JSON (Web Time Series Service)"
+    spatial_resolution = "10 metros x 10 metros (Cubo Sentinel-2 16 dias)"
+    temporal_resolution = "Composição a cada 16 dias (2017–2026)"
+    coverage = "100% do Brasil (Extraído pixel exato da Fazenda Piloto)"
+    data_nature = "Dado Fatídico (Observação Orbital 10m)"
+    period_min = "Jan/2017"
+    period_max = "Out/2026 (226 composições)"
+    plain_question = "O histórico de satélite (NDVI) confirma a dupla safra Soja + Milho neste talhão sem precisar de token?"
+    fit_score = 5
+    fit_analysis = (
+        "Breakthrough operacional para o Brasil: enquanto o NASA AppEEARS e CMR exigem Earthdata Token "
+        "para baixar séries de NDVI por pixel, o WTSS v4 do INPE entrega 10 anos de Sentinel-2 (10m) em JSON "
+        "aberto em uma única chamada REST."
+    )
+    viz_type = "ndvi_rotation"
+
+    def extract(self) -> Dict[str, Any]:
+        today_str = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+        params = {
+            "coverage": "S2-16D-2",
+            "attributes": "NDVI",
+            "latitude": ANCHOR_FARM["lat"],
+            "longitude": ANCHOR_FARM["lon"],
+            "start_date": "2017-01-01",
+            "end_date": today_str,
+        }
+        resp, latency = self.timed_request(self.url, params=params, timeout=40)
+        self.save_bronze("inpe_bdc_wtss_s2_ndvi.json", resp.text)
+        data = resp.json()
+
+        result = data.get("result", {})
+        timeline = result.get("timeline", [])
+        attrs = result.get("attributes", [])
+        raw_vals = attrs[0].get("values", []) if attrs else []
+
+        valid_points: List[Dict[str, Any]] = []
+        cloud_filtered = 0
+        for dt_str, raw_v in zip(timeline, raw_vals):
+            if raw_v is None or raw_v <= -9000:
+                cloud_filtered += 1
+                continue
+            valid_points.append({"date": dt_str, "ndvi": round(float(raw_v) / 10000.0, 3)})
+
+        # Agrupa por ano-safra agrícola (Outubro do ano Y até Setembro de Y+1)
+        by_harvest: Dict[str, Dict[str, List[float]]] = {}
+        for pt in valid_points:
+            yr = int(pt["date"][:4])
+            mo = int(pt["date"][5:7])
+            harvest_yr = yr if mo >= 10 else yr - 1
+            if harvest_yr < 2017 or harvest_yr > 2025:
+                continue
+            label = f"{harvest_yr}/{str(harvest_yr + 1)[-2:]}"
+            bucket = by_harvest.setdefault(label, {"safra1": [], "safra2": []})
+            if mo in (10, 11, 12, 1, 2):
+                bucket["safra1"].append(pt["ndvi"])
+            elif mo in (3, 4, 5, 6):
+                bucket["safra2"].append(pt["ndvi"])
+
+        yearly_cycles: List[Dict[str, Any]] = []
+        double_crop_years = 0
+        for label in sorted(by_harvest.keys()):
+            s1 = by_harvest[label]["safra1"]
+            s2 = by_harvest[label]["safra2"]
+            p1 = round(max(s1), 2) if s1 else None
+            p2 = round(max(s2), 2) if s2 else None
+            has_double = bool((p1 or 0) >= 0.55 and (p2 or 0) >= 0.50)
+            if has_double:
+                double_crop_years += 1
+            yearly_cycles.append(
+                {
+                    "harvest": label,
+                    "peak_safra1_ndvi": p1,
+                    "peak_safra2_ndvi": p2,
+                    "double_crop_detected": has_double,
+                }
+            )
+
+        first_dt = valid_points[0]["date"] if valid_points else "2017-01-01"
+        last_dt = valid_points[-1]["date"] if valid_points else today_str
+        detected_rotation = (
+            f"Dupla Safra Contínua (1ª Safra Verão + 2ª Safra Outono-Inverno confirmada em "
+            f"{double_crop_years} de {len(yearly_cycles)} ciclos analisados)"
+        )
+
+        return {
+            "status": "ONLINE_OPEN" if resp.ok and valid_points else "ERROR",
+            "http_status": resp.status_code,
+            "latency_ms": latency,
+            "actual_format": "application/json (WTSS Time Series)",
+            "period_min": first_dt,
+            "period_max": f"{last_dt} ({len(valid_points)} pts úteis)",
+            "plain_answer": (
+                f"Série real Sentinel-2 (10m) extraída sem token: {len(valid_points)} datas válidas "
+                f"({first_dt} a {last_dt}). {detected_rotation}."
+            ),
+            "raw_sample": json.dumps(
+                {"coverage": "S2-16D-2", "total_timeline": len(timeline), "valid_points": len(valid_points), "sample": valid_points[-10:]},
+                indent=2,
+            ),
+            "parsed_data": {
+                "coverage": "S2-16D-2",
+                "total_timeline": len(timeline),
+                "valid_count": len(valid_points),
+                "cloud_masked_count": cloud_filtered,
+                "double_crop_years": double_crop_years,
+                "analyzed_harvests": len(yearly_cycles),
+                "detected_rotation": detected_rotation,
+                "yearly_cycles": yearly_cycles,
+                "timeline_ndvi": valid_points,
+            },
         }

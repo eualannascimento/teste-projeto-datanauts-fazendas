@@ -20,10 +20,10 @@
   "viz_type": "sicor_credit",
   "status": "ONLINE_OPEN",
   "http_status": 200,
-  "latency_ms": 7056,
+  "latency_ms": 151,
   "audit_notes": "Endpoint agregado respondeu normalmente. Endpoint municipal CusteioMunicipioProduto exige carga batch noturna devido a ausência de índice SQL para filtro por codIbge.",
   "error": null,
-  "extracted_at": "2026-11-14T16:19:38.423921+00:00",
+  "extracted_at": "2026-11-14T18:45:48.819379+00:00",
   "raw_sample": "[\n  {\n    \"nomeProduto\": \"\\\"UVA\\\"\",\n    \"nomeRegiao\": \"NORDESTE\",\n    \"nomeUF\": \"CE\",\n    \"MesEmissao\": \"09\",\n    \"AnoEmissao\": \"2014\",\n    \"cdPrograma\": \"0001\",\n    \"cdSubPrograma\": \"0\",\n    \"cdFonteRecurso\": \"0300\",\n    \"cdTipoSeguro\": \"2\",\n    \"QtdCusteio\": 1,\n    \"VlCusteio\": 18162.85,\n    \"Atividade\": \"1\",\n    \"cdModalidade\": \"01\",\n    \"AreaCusteio\": null\n  },\n  {\n    \"nomeProduto\": \"\\\"SOJA\\\"\",\n    \"nomeRegiao\": \"CENTRO-OESTE\",\n    \"nomeUF\": \"MT\",\n    \"MesEmissao\": \"05\",\n    \"AnoEmissao\": \"2019\",\n    \"cdPrograma\": \"0001\",\n    \"cdSubPrograma\": \"1\",\n    \"cdFonteRecurso\": \"0201\",\n    \"cdTipoSeguro\": \"2\",\n    \"QtdCusteio\": 1,\n    \"VlCusteio\": 147080.0,\n    \"Atividade\": \"1\",\n    \"cdModalidade\": \"01\",\n    \"AreaCusteio\": null\n  },\n  {\n    \"nomeProduto\": \"\\\"BOVINOS\\\"\",\n    \"nomeRegiao\": \"NORDESTE\",\n    \"nomeUF\": \"SE\",\n    \"MesEmissao\": \"02\",\n    \"AnoEmissao\": \"2016\",\n    \"cdPrograma\": \"0999\",\n    \"cdSubPrograma\": \"0\",\n    \"cdFonteRecurso\": \"0300\",\n    \"cdTipoSeguro\": \"9\",\n    \"QtdCusteio\": 4,\n    \"VlCusteio\": 137419.68,\n    \"Atividade\": \"2\",\n    \"cdModalidade\": \"26\",\n    \"AreaCusteio\": null\n  }\n]",
   "parsed_data": {
     "sample_rows": 120,
@@ -42,9 +42,9 @@
       },
       {
         "product": "BOVINOS",
-        "vl_custeio": 27088057.88,
+        "vl_custeio": 26909454.27,
         "area_ha": 0.0,
-        "contracts": 19
+        "contracts": 18
       },
       {
         "product": "ARROZ",
@@ -54,9 +54,9 @@
       },
       {
         "product": "MILHO",
-        "vl_custeio": 13783378.89,
+        "vl_custeio": 14117353.89,
         "area_ha": 0.0,
-        "contracts": 8
+        "contracts": 9
       },
       {
         "product": "CANA-DE-AÇUCAR",

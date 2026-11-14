@@ -6,7 +6,7 @@
   "url": "https://www.cpc.ncep.noaa.gov/data/indices/oni.ascii.txt",
   "auth_required": "Nenhum (100% Aberto)",
   "expected_format": "ASCII Text (Tabular)",
-  "actual_format": "text/plain (ASCII colunar)",
+  "actual_format": "text/plain (ONI ASCII) + text/html (Boletim CPC)",
   "spatial_resolution": "Região Niño 3.4 (5°N–5°S, 120°–170°W)",
   "temporal_resolution": "Trimestral Móvel (1950–2026)",
   "coverage": "Pacífico Equatorial (Global Teleconnection)",
@@ -14,16 +14,16 @@
   "period_min": "DJF 1950",
   "period_max": "ASO 2026",
   "plain_question": "O fenômeno El Niño está ativo hoje e qual é a sua força?",
-  "plain_answer": "Estamos em fase 'El Niño Forte' com anomalia de +2.46°C no Pacífico (ASO 2026), sinalizando alerta máximo de atraso ou irregularidade de chuvas no Centro-Oeste.",
+  "plain_answer": "Estamos em fase 'El Niño Forte' com anomalia de +2.46°C no Pacífico (ASO 2026), sinalizando alerta máximo de atraso ou irregularidade de chuvas no Centro-Oeste. Boletim CPC (12 November 2026): El Niño Advisory. Probabilidade oficial citada: >79%.",
   "fit_score": 5,
   "fit_analysis": "Essencial como gatilho macro do motor: identifica oficialmente fases de El Niño (ONI ≥ +0.5°C) e La Niña (ONI ≤ -0.5°C), permitindo selecionar anos análogos históricos como 2015/16 e 2023/24.",
   "viz_type": "oni_timeline",
   "status": "ONLINE_OPEN",
   "http_status": 200,
-  "latency_ms": 704,
+  "latency_ms": 901,
   "audit_notes": "",
   "error": null,
-  "extracted_at": "2026-11-14T16:18:45.218048+00:00",
+  "extracted_at": "2026-11-14T18:43:33.696063+00:00",
   "raw_sample": "SEAS  YR   TOTAL   ANOM\nDJF 1950  25.01  -1.32\nJFM 1950  25.36  -1.20\nFMA 1950  25.88  -1.12\n...\nMAM 2026  28.09   0.46\nAMJ 2026  28.74   0.95\nMJJ 2026  29.02   1.39\nJJA 2026  29.09   1.80\nJAS 2026  29.12   2.16\nASO 2026  29.23   2.46",
   "parsed_data": {
     "latest": {
@@ -288,6 +288,11 @@
         "total_sst": 29.23,
         "anomaly": 2.46
       }
-    ]
+    ],
+    "alert_status": "El Niño Advisory",
+    "discussion_date": "12 November 2026",
+    "forecast_synopsis": "El Niño continues to strengthen, with a strong-to-very strong El Niño likely through January-March 2027 (remaining greater than a 79% chance).",
+    "forecast_prob_pct": 79,
+    "advisory_url": "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_advisory/ensodisc.shtml"
   }
 }

@@ -20,10 +20,10 @@
   "viz_type": "cmr_granules",
   "status": "ONLINE_DISCOVERY_ONLY",
   "http_status": 200,
-  "latency_ms": 559,
+  "latency_ms": 684,
   "audit_notes": "Cobertura contínua confirmada via CMR. Download no GES DISC requer Earthdata Token.",
   "error": null,
-  "extracted_at": "2026-11-14T16:19:23.595437+00:00",
+  "extracted_at": "2026-11-14T18:45:22.257197+00:00",
   "raw_sample": "[\n  {\n    \"id\": \"GLDAS_NOAH025_3H.2.1:GLDAS_NOAH025_3H.A20260731.2100.021.nc4\",\n    \"start\": \"2026-07-31T21:00:00.000Z\",\n    \"end\": \"2026-07-31T21:00:00.000Z\",\n    \"size_mb\": \"21.2247314453125\",\n    \"download_url\": \"https://data.gesdisc.earthdata.nasa.gov/data/GLDAS/GLDAS_NOAH025_3H.2.1/2026/212/GLDAS_NOAH025_3H.A20260731.2100.021.nc4\"\n  },\n  {\n    \"id\": \"GLDAS_NOAH025_3H.2.1:GLDAS_NOAH025_3H.A20260731.1800.021.nc4\",\n    \"start\": \"2026-07-31T18:00:00.000Z\",\n    \"end\": \"2026-07-31T18:00:00.000Z\",\n    \"size_mb\": \"21.3994283676147\",\n    \"download_url\": \"https://data.gesdisc.earthdata.nasa.gov/data/GLDAS/GLDAS_NOAH025_3H.2.1/2026/212/GLDAS_NOAH025_3H.A20260731.1800.021.nc4\"\n  }\n]",
   "parsed_data": {
     "collection": "GLDAS_NOAH025_3H v2.1",

@@ -14,30 +14,58 @@
   "period_min": "Estático (Perfil permanente)",
   "period_max": "Estático (Válido para qualquer safra)",
   "plain_question": "O solo da fazenda é arenoso ou argiloso (retém água bem)? Qual a classe no ZARC?",
-  "plain_answer": "Detectado solo com 38.5% de argila na camada 15–30cm -> classificado automaticamente como Tipo 3 (Argiloso ≥ 35% argila — Alta retenção hídrica).",
+  "plain_answer": "Detectado solo com 38.5% de argila na camada 15–30cm -> Tipo 3 (Argiloso ≥ 35% argila — Alta retenção hídrica); CAD física real de 98.6 mm em 85 cm (116.0 mm/m via wv0033−wv1500) e pH 5.4.",
   "fit_score": 5,
   "fit_analysis": "Resolve um grande gargalo de UX: descobre automaticamente pela coordenada GPS se o solo da fazenda é Arenoso (Tipo 1), Médio (Tipo 2) ou Argiloso (Tipo 3) para consultar as regras corretas de janela de seguro do ZARC (Embrapa).",
   "viz_type": "soil_profile",
   "status": "ONLINE_OPEN",
   "http_status": 200,
-  "latency_ms": 2862,
+  "latency_ms": 34396,
   "audit_notes": "",
   "error": null,
-  "extracted_at": "2026-11-14T16:19:20.157510+00:00",
-  "raw_sample": "{\n  \"type\": \"Feature\",\n  \"geometry\": {\n    \"type\": \"Point\",\n    \"coordinates\": [\n      -51.02,\n      -17.84\n    ]\n  },\n  \"properties\": {\n    \"layers\": [\n      {\n        \"name\": \"clay\",\n        \"unit_measure\": {\n          \"d_factor\": 10,\n          \"mapped_units\": \"g/kg\",\n          \"target_units\": \"%\",\n          \"uncertainty_unit\": \"\"\n        },\n        \"depths\": [\n          {\n            \"range\": {\n              \"top_depth\": 0,\n              \"bottom_depth\": 5,\n              \"unit_depth\": \"cm\"\n            },\n            \"label\": \"0-5cm\",\n            \"values\": {\n              \"mean\": 340\n            }\n          },\n          {\n            \"range\": {\n              \"top_depth\": 15,\n              \"bottom_depth\": 30,\n              \"unit_depth\": \"cm\"\n            },\n            \"label\": \"15-30cm\",\n            \"values\": {\n              \"mean\": 385\n            }\n          }\n        ]\n      },\n      {\n        \"name\": \"sand\",\n        \"unit_measure\": {\n          \"d_factor\": 10,\n          \"mapped_units\": \"g/kg\",\n          \"target_units\": \"%\",\n          \"uncertainty_unit\": \"\"\n        },\n        \"depths\": [\n          {\n            \"range\": {\n              \"top_depth\": 0,\n              \"bottom_depth\": 5,\n              \"unit_depth\": \"cm\"\n            },\n            \"label\": \"0-5cm\",\n            \"values\": {\n              \"mean\": 470\n            }\n          },\n          {\n            \"range\": {\n              \"top_depth\": 15,\n              \"bottom_depth\": 30,\n              \"unit_depth\": \"cm\"\n            },\n            \"label\": \"15-30cm\",\n            \"values\": {\n              \"mean\": 445\n          ",
+  "extracted_at": "2026-11-14T18:44:10.147777+00:00",
+  "raw_sample": "{\n  \"type\": \"Feature\",\n  \"geometry\": {\n    \"type\": \"Point\",\n    \"coordinates\": [\n      -51.02,\n      -17.84\n    ]\n  },\n  \"properties\": {\n    \"layers\": [\n      {\n        \"name\": \"cec\",\n        \"unit_measure\": {\n          \"d_factor\": 10,\n          \"mapped_units\": \"mmol(c)/kg\",\n          \"target_units\": \"cmol(c)/kg\",\n          \"uncertainty_unit\": \"\"\n        },\n        \"depths\": [\n          {\n            \"range\": {\n              \"top_depth\": 0,\n              \"bottom_depth\": 5,\n              \"unit_depth\": \"cm\"\n            },\n            \"label\": \"0-5cm\",\n            \"values\": {\n              \"mean\": 103\n            }\n          },\n          {\n            \"range\": {\n              \"top_depth\": 15,\n              \"bottom_depth\": 30,\n              \"unit_depth\": \"cm\"\n            },\n            \"label\": \"15-30cm\",\n            \"values\": {\n              \"mean\": 73\n            }\n          }\n        ]\n      },\n      {\n        \"name\": \"clay\",\n        \"unit_measure\": {\n          \"d_factor\": 10,\n          \"mapped_units\": \"g/kg\",\n          \"target_units\": \"%\",\n          \"uncertainty_unit\": \"\"\n        },\n        \"depths\": [\n          {\n            \"range\": {\n              \"top_depth\": 0,\n              \"bottom_depth\": 5,\n              \"unit_depth\": \"cm\"\n            },\n            \"label\": \"0-5cm\",\n            \"values\": {\n              \"mean\": 340\n            }\n          },\n          {\n            \"range\": {\n              \"top_depth\": 15,\n              \"bottom_depth\": 30,\n              \"unit_depth\": \"cm\"\n            },\n            \"label\": \"15-30cm\",\n            \"values\": {\n              \"mean\": 3",
   "parsed_data": {
     "depths": {
       "0-5cm": {
+        "cec": 10.3,
         "clay": 34.0,
+        "nitrogen": 1.52,
+        "phh2o": 5.4,
         "sand": 47.0,
-        "silt": 19.0
+        "silt": 19.0,
+        "soc": 17.9,
+        "wv0033": 25.7,
+        "wv1500": 13.7
       },
       "15-30cm": {
+        "cec": 7.3,
         "clay": 38.5,
+        "nitrogen": 0.99,
+        "phh2o": 5.4,
         "sand": 44.5,
-        "silt": 17.0
+        "silt": 17.0,
+        "soc": 11.4,
+        "wv0033": 25.2,
+        "wv1500": 13.7
       }
     },
+    "chemistry": {
+      "ph_0_5": 5.4,
+      "ph_15_30": 5.4,
+      "soc_g_kg_0_5": 17.9,
+      "soc_g_kg_15_30": 11.4,
+      "cec_cmolc_kg_0_5": 10.3,
+      "cec_cmolc_kg_15_30": 7.3,
+      "nitrogen_g_kg_0_5": 1.52,
+      "wv0033_pct_15_30": 25.2,
+      "wv1500_pct_15_30": 13.7,
+      "awc_pct_15_30": 11.5,
+      "cad_mm_per_m": 116.0,
+      "cad_85cm_mm": 98.6
+    },
+    "cad_mm_per_m": 116.0,
+    "cad_85cm_mm": 98.6,
     "zarc_soil_code": 3,
     "zarc_soil_classification": "Tipo 3 (Argiloso ≥ 35% argila — Alta retenção hídrica)"
   }
